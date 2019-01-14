@@ -85,19 +85,19 @@ public class ComputerActivity extends AppCompatActivity implements AdapterView.O
     }
 
 
-    //用于接收到的服务端的消息，显示在界面上
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void setData(MessageEvent messageEvent) {
-        switch (messageEvent.getTAG()) {
-            case MyApp.ACCEPPT:
-                if (messageEvent.getMessage() != null) {
-                    Toast.makeText(ComputerActivity.this, messageEvent.getMessage(), Toast.LENGTH_SHORT).show();
-                    System.out.println(messageEvent.getMessage());
-                }
-                break;
-        }
-
-    }
+//    //用于接收到的服务端的消息，显示在界面上
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void setData(MessageEvent messageEvent) {
+//        switch (messageEvent.getTAG()) {
+//            case MyApp.ACCEPPT:
+//                if (messageEvent.getMessage() != null) {
+//                    Toast.makeText(ComputerActivity.this, messageEvent.getMessage(), Toast.LENGTH_SHORT).show();
+//                    System.out.println(messageEvent.getMessage());
+//                }
+//                break;
+//        }
+//
+//    }
 
     @Override
     protected void onDestroy() {

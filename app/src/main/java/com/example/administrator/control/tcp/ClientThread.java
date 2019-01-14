@@ -56,15 +56,17 @@ public class ClientThread implements Runnable {
             os = socket.getOutputStream();
             if (socket.isConnected()) {
                 Log.v("sd", "socket已连接");
-                ComputerBean computerBean = new ComputerBean("111111", "server", TimeUtil.nowTime(), "Connect", null, null, null);
+                ComputerBean computerBean = new ComputerBean("33333", "server", TimeUtil.nowTime(), "Connect", null, null, null);
                 sendData(new Gson().toJson(computerBean));
+                ComputerBean computerBean1 = new ComputerBean("33333", "server", TimeUtil.nowTime(), "GetId", "test", "client", "client");
+                sendData(new Gson().toJson(computerBean1));
             } else {
                 socket.connect(new InetSocketAddress(IP, SPORT), TIME_OUT);
             }
             //接收服务端的数据
             br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
             getData();
-            sendData(null);
+//            sendData(null);
         } catch (IOException e) {
             e.printStackTrace();
             if (e instanceof SocketTimeoutException) {
@@ -104,6 +106,7 @@ public class ClientThread implements Runnable {
 
     //发送数据
     public void sendData(String msg) {
+        System.out.println("send:" + msg);
         if (msg != null) {
             try {
                 os.write(msg.getBytes("utf-8"));
@@ -116,7 +119,7 @@ public class ClientThread implements Runnable {
             revHandler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
-                    //将用户输入的内容写入到服务器，并在前面加上手机型号
+                    //将用户输入的内容写入到服务器
                     try {
                         os.write(((msg.obj) + "").getBytes("utf-8"));
                     } catch (IOException e) {

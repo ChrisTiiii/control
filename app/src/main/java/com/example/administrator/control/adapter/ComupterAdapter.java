@@ -25,6 +25,8 @@ import butterknife.ButterKnife;
 public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.ComputerViewHolder> {
     private Context context;
     private List<String> list;
+    // 利用接口 -> 给RecyclerView设置点击事件
+    private ItemClickListener mItemClickListener;
 
     public ComupterAdapter(Context context, List<String> list) {
         this.context = context;
@@ -40,10 +42,19 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ComputerViewHolder computerViewHolder, int i) {
+    public void onBindViewHolder(@NonNull ComputerViewHolder computerViewHolder, final int position) {
         Glide.with(context).load(R.drawable.computer).into(computerViewHolder.imgComputer);
-        computerViewHolder.tvComputerid.setText(list.get(i));
-
+        computerViewHolder.tvComputerid.setText(list.get(position));
+        // 点击事件一般都写在绑定数据这里，当然写到上边的创建布局时候也是可以的
+        if (mItemClickListener != null) {
+            computerViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 这里利用回调来给RecyclerView设置点击事件
+                    mItemClickListener.onItemClick(position);
+                }
+            });
+        }
     }
 
     @Override
@@ -62,4 +73,15 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
             ButterKnife.bind(this, view);
         }
     }
+
+    public interface ItemClickListener {
+        public void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(ItemClickListener itemClickListener) {
+        this.mItemClickListener = itemClickListener;
+
+    }
+
+
 }

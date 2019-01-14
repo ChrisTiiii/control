@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <ScrollView
@@ -12,23 +12,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:background="#cdcdcd"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:alpha="0.5"
-                    android:background="#cdcdcd"
+
                     android:paddingLeft="8dp"
-                    android:text="电脑型号" />
+                    android:text="电脑型号:" />
 
                 <TextView
                     android:id="@+id/computer_id"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+
+                    android:text="ceshi" />
             </LinearLayout>
 
 
@@ -161,6 +165,15 @@
                     android:text="暂停"
                     android:textSize="22sp" />
 
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="18dp">
+
                 <Button
                     android:id="@+id/btn_video_up"
                     android:layout_width="wrap_content"
@@ -176,6 +189,20 @@
                     android:textSize="22sp" />
 
                 <Button
+                    android:id="@+id/fullscreen"
+                    android:textSize="22sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="全屏" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="18dp">
+
+                <Button
                     android:id="@+id/btn_video_speed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -189,14 +216,33 @@
                     android:text="后退"
                     android:textSize="22sp" />
 
-            </LinearLayout>
+                <Button
+                    android:id="@+id/btn_video_voiceup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="升高"
+                    android:textSize="22sp" />
 
+                <Button
+                    android:id="@+id/btn_video_voicelow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="降低"
+                    android:textSize="22sp" />
+
+                <Button
+                    android:id="@+id/btn_video_mute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="静音"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
 
 
         </LinearLayout>
 
     </ScrollView>
-
 
 
 </LinearLayout>
