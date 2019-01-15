@@ -1,6 +1,7 @@
 package com.example.administrator.control.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +28,20 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
     private List<String> list;
     // 利用接口 -> 给RecyclerView设置点击事件
     private ItemClickListener mItemClickListener;
+    //先声明一个int成员变量
+    private int thisPosition;
+
+    //再定义一个int类型的返回值方法
+    public int getthisPosition() {
+        return thisPosition;
+    }
+
+    //其次定义一个方法用来绑定当前参数值的方法
+    //此方法是在调用此适配器的地方调用的，此适配器内不会被调用到
+    public void setThisPosition(int thisPosition) {
+        this.thisPosition = thisPosition;
+        notifyDataSetChanged();
+    }
 
     public ComupterAdapter(Context context, List<String> list) {
         this.context = context;
@@ -55,6 +70,11 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
                 }
             });
         }
+        if (position == getthisPosition()) {
+            computerViewHolder.tvComputerid.setTextColor(Color.parseColor("#FA8072"));
+        } else {
+            computerViewHolder.tvComputerid.setTextColor(Color.parseColor("#1F1F1F"));
+        }
     }
 
     @Override
@@ -75,7 +95,7 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
     }
 
     public interface ItemClickListener {
-        public void onItemClick(int position);
+        void onItemClick(int position);
     }
 
     public void setOnItemClickListener(ItemClickListener itemClickListener) {

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.control.R;
 import com.example.administrator.control.bean.CommandBean;
@@ -68,6 +69,31 @@ public class ControlFragment extends Fragment {
     Button btnVideoMute;
     @BindView(R.id.fullscreen)
     Button fullscreen;
+    @BindView(R.id.btn_video_normal)
+    Button btnVideoNormal;
+    @BindView(R.id.btn_img_start)
+    Button btnImgStart;
+    @BindView(R.id.btn_img_bigger)
+    Button btnImgBigger;
+    @BindView(R.id.btn_img_smaller)
+    Button btnImgSmaller;
+    @BindView(R.id.btn_img_full)
+    Button btnImgFull;
+    @BindView(R.id.btn_img_exit)
+    Button btnImgExit;
+    @BindView(R.id.ppt_start)
+    Button pptStart;
+    @BindView(R.id.ppt_last)
+    Button pptLast;
+    @BindView(R.id.ppt_next)
+    Button pptNext;
+    @BindView(R.id.ppt_first)
+    Button pptFirst;
+    @BindView(R.id.ppt_lastest)
+    Button pptLastest;
+    @BindView(R.id.ppt_exit)
+    Button pptExit;
+
 
     private String compId;
     private ClientThread thread;
@@ -95,19 +121,6 @@ public class ControlFragment extends Fragment {
         unbinder.unbind();
     }
 
-//    {
-//        'From': 'Server',   # send information terminal
-//        'SendTo': contact,  # recive information terminal
-//        'Time': ctime()     # sending time
-//        'Type': 'command',    # information type
-//        'Status': 'Success' # reply status
-//        'Command': {
-//        Kind:1,  # video 1,img 2,serialport 3
-//        Order:2  # open 1,play/pause 2, stop3, fullscreen 4,voiceup 5, voicelow 6, Mute 7, speed up 8,  speed low 9, speed normal 10, next 11, previous 12
-//    } # command
-//        'Msg': server_msg,  # message
-//    }
-
 
     public void sendMsg(int kind, int order, String msg) {
         CommandBean.Command command = new CommandBean.Command(kind, order);
@@ -116,7 +129,7 @@ public class ControlFragment extends Fragment {
     }
 
 
-    @OnClick({R.id.btn_computer_open, R.id.fullscreen, R.id.btn_computer_close, R.id.btn_light_open, R.id.btn_light_close, R.id.btn_img_last, R.id.btn_img_next, R.id.btn_video_open, R.id.btn_video_close, R.id.btn_video_start, R.id.btn_video_stop, R.id.btn_video_up, R.id.btn_video_down, R.id.btn_video_speed, R.id.btn_video_backup, R.id.btn_video_voiceup, R.id.btn_video_voicelow, R.id.btn_video_mute})
+    @OnClick({R.id.btn_video_normal, R.id.btn_computer_open, R.id.fullscreen, R.id.btn_computer_close, R.id.btn_light_open, R.id.btn_light_close, R.id.btn_img_last, R.id.btn_img_next, R.id.btn_video_open, R.id.btn_video_close, R.id.btn_video_start, R.id.btn_video_stop, R.id.btn_video_up, R.id.btn_video_down, R.id.btn_video_speed, R.id.btn_video_backup, R.id.btn_video_voiceup, R.id.btn_video_voicelow, R.id.btn_video_mute, R.id.btn_img_start, R.id.btn_img_bigger, R.id.btn_img_smaller, R.id.btn_img_full, R.id.btn_img_exit,R.id.ppt_start, R.id.ppt_last, R.id.ppt_next, R.id.ppt_first, R.id.ppt_lastest, R.id.ppt_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_computer_open:
@@ -128,47 +141,87 @@ public class ControlFragment extends Fragment {
             case R.id.btn_light_close:
                 break;
             case R.id.btn_img_last:
-                sendMsg(2, 12, "last");
+                sendMsg(2, 4, "img last");
                 break;
             case R.id.btn_img_next:
-                sendMsg(2, 11, "next");
+                sendMsg(2, 5, "img next");
                 break;
+            case R.id.btn_img_start:
+                sendMsg(2, 1, "img start");
+                break;
+            case R.id.btn_img_bigger:
+                sendMsg(2, 2, "img bigger");
+                break;
+            case R.id.btn_img_smaller:
+                sendMsg(2, 3, "img smaller");
+                break;
+            case R.id.btn_img_full:
+                sendMsg(2, 7, "img full");
+                break;
+            case R.id.btn_img_exit:
+                sendMsg(2, 6, "img exit");
+                break;
+
             case R.id.btn_video_open:
-                sendMsg(1, 1, "open");
+                sendMsg(1, 1, "video open");
                 break;
             case R.id.btn_video_close:
-                sendMsg(1, 3, "close");
+                sendMsg(1, 3, "video close");
                 break;
             case R.id.btn_video_start:
-                sendMsg(1, 2, "start");
+                sendMsg(1, 2, "video start");
                 break;
             case R.id.btn_video_stop:
-                sendMsg(1, 2, "stop");
+                sendMsg(1, 2, "video stop");
                 break;
             case R.id.btn_video_up:
-                sendMsg(1, 12, "previous");
+                sendMsg(1, 12, "video previous");
                 break;
             case R.id.btn_video_down:
-                sendMsg(1, 11, "next");
+                sendMsg(1, 11, "video next");
                 break;
             case R.id.btn_video_speed:
-                sendMsg(1, 8, "speed up");
+                sendMsg(1, 8, "video speed up");
                 break;
             case R.id.btn_video_backup:
-                sendMsg(1, 9, "speed low");
+                sendMsg(1, 9, "video speed low");
                 break;
             case R.id.btn_video_voiceup:
-                sendMsg(1, 5, "up");
+                sendMsg(1, 5, "video up");
                 break;
             case R.id.btn_video_voicelow:
-                sendMsg(1, 6, "down");
+                sendMsg(1, 6, "video down");
                 break;
             case R.id.btn_video_mute:
-                sendMsg(1, 7, "mute");
+                sendMsg(1, 7, "video mute");
                 break;
             case R.id.fullscreen:
-                sendMsg(1, 4, "fullscreen");
+                sendMsg(1, 4, "video fullscreen");
                 break;
+            case R.id.btn_video_normal:
+                sendMsg(1, 10, "video normal");
+                break;
+            case R.id.ppt_start:
+                sendMsg(3,1,"ppt start");
+                break;
+            case R.id.ppt_last:
+                sendMsg(3,2,"ppt last");
+                break;
+            case R.id.ppt_next:
+                sendMsg(3,3,"ppt next");
+                break;
+            case R.id.ppt_first:
+                sendMsg(3,4,"ppt first");
+                break;
+            case R.id.ppt_lastest:
+                sendMsg(3,5,"ppt lastest");
+                break;
+            case R.id.ppt_exit:
+                sendMsg(3,6,"ppt exit");
+                break;
+
         }
     }
+
+
 }

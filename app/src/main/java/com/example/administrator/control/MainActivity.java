@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         comupterAdapter.setOnItemClickListener(new ComupterAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                comupterAdapter.setThisPosition(position);
                 Connect connect = new Connect(account, "Connect", list.get(position), "client");
                 clientThread.sendData(new Gson().toJson(connect));
                 getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(position), clientThread)).commit();
