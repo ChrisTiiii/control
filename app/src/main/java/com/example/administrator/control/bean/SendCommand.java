@@ -1,15 +1,12 @@
 package com.example.administrator.control.bean;
 
-import android.widget.ListView;
-
-import java.util.List;
 
 /**
  * author: ZhongMing
  * DATE: 2019/1/14 0014
  * Description:
  **/
-public class CommandBean {
+public class SendCommand {
     private String From;
     private String SendTo;
     private String Time;
@@ -18,7 +15,7 @@ public class CommandBean {
     private Command Command;
     private String Msg;
 
-    public CommandBean(String from, String sendTo, String time, String type, String status, CommandBean.Command command, String msg) {
+    public SendCommand(String from, String sendTo, String time, String type, String status, SendCommand.Command command, String msg) {
         From = from;
         SendTo = sendTo;
         Time = time;
@@ -68,11 +65,11 @@ public class CommandBean {
         Status = status;
     }
 
-    public CommandBean.Command getCommand() {
+    public SendCommand.Command getCommand() {
         return Command;
     }
 
-    public void setCommand(CommandBean.Command command) {
+    public void setCommand(SendCommand.Command command) {
         Command = command;
     }
 

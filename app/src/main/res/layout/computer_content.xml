@@ -37,6 +37,7 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_all"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -59,309 +60,318 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.5"
-                android:background="#cdcdcd"
-                android:paddingLeft="8dp"
-                android:text="灯光" />
 
             <LinearLayout
+                android:id="@+id/option"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="18dp">
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.5"
+                    android:background="#cdcdcd"
+                    android:paddingLeft="8dp"
+                    android:text="灯光" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="18dp">
 
 
-                <Button
-                    android:id="@+id/btn_light_open"
+                    <Button
+                        android:id="@+id/btn_light_open"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="打开"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_light_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="关闭"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.5"
+                    android:background="#cdcdcd"
+                    android:paddingLeft="8dp"
+                    android:text="图片" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="18dp">
+
+
+                    <Button
+                        android:id="@+id/btn_img_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="播放"
+                        android:textSize="22sp" />
+
+
+                    <Button
+                        android:id="@+id/btn_img_last"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="上一张"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_img_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="下一张"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_img_bigger"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="放大+"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_img_smaller"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="缩小-"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="18dp">
+
+                    <Button
+                        android:id="@+id/btn_img_full"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="全屏"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_img_exit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="退出"
+                        android:textSize="22sp" />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.5"
+                    android:background="#cdcdcd"
+                    android:paddingLeft="8dp"
+                    android:text="PPT" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="18dp">
+
+
+                    <Button
+                        android:id="@+id/ppt_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="播放"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/ppt_last"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="上一张"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/ppt_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="下一张"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/ppt_first"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="第一张"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/ppt_lastest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="最后"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="18dp">
+
+                    <Button
+                        android:id="@+id/ppt_exit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="退出"
+                        android:textSize="22sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.5"
+                    android:background="#cdcdcd"
+                    android:paddingLeft="8dp"
+                    android:text="视频" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="18dp">
+
+                    <Button
+                        android:id="@+id/btn_video_open"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="打开"
+                        android:textSize="22sp" />
+
+
+                    <Button
+                        android:id="@+id/btn_video_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="关闭"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_video_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="开始"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_video_stop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="暂停"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/fullscreen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="全屏"
+                        android:textSize="22sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="打开"
-                    android:textSize="22sp" />
+                    android:orientation="horizontal"
+                    android:padding="18dp">
 
-                <Button
-                    android:id="@+id/btn_light_close"
+                    <Button
+                        android:id="@+id/btn_video_up"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="上一个"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_video_down"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="下一个"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_video_voiceup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="音量+"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_video_voicelow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="音量-"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_video_mute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="静音"
+                        android:textSize="22sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="关闭"
-                    android:textSize="22sp" />
+                    android:orientation="horizontal"
+                    android:padding="18dp">
+
+
+                    <Button
+                        android:id="@+id/btn_video_speed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="快进"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_video_backup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="后退"
+                        android:textSize="22sp" />
+
+                    <Button
+                        android:id="@+id/btn_video_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="正常"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.5"
-                android:background="#cdcdcd"
-                android:paddingLeft="8dp"
-                android:text="图片" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="18dp">
-
-
-                <Button
-                    android:id="@+id/btn_img_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="播放"
-                    android:textSize="22sp" />
-
-
-                <Button
-                    android:id="@+id/btn_img_last"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="上一张"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_img_next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="下一张"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_img_bigger"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="放大+"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_img_smaller"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="缩小-"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="18dp">
-
-                <Button
-                    android:id="@+id/btn_img_full"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="全屏"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_img_exit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="退出"
-                    android:textSize="22sp" />
-
-
-            </LinearLayout>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.5"
-                android:background="#cdcdcd"
-                android:paddingLeft="8dp"
-                android:text="PPT" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="18dp">
-
-
-                <Button
-                    android:id="@+id/ppt_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="播放"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/ppt_last"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="上一张"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/ppt_next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="下一张"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/ppt_first"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="第一张"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/ppt_lastest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="最后"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="18dp">
-
-                <Button
-                    android:id="@+id/ppt_exit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="退出"
-                    android:textSize="22sp" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.5"
-                android:background="#cdcdcd"
-                android:paddingLeft="8dp"
-                android:text="视频" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="18dp">
-
-                <Button
-                    android:id="@+id/btn_video_open"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="打开"
-                    android:textSize="22sp" />
-
-
-                <Button
-                    android:id="@+id/btn_video_close"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="关闭"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_video_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="开始"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_video_stop"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="暂停"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/fullscreen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="全屏"
-                    android:textSize="22sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="18dp">
-
-                <Button
-                    android:id="@+id/btn_video_up"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="上一个"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_video_down"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="下一个"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_video_voiceup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="音量+"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_video_voicelow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="音量-"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_video_mute"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="静音"
-                    android:textSize="22sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="18dp">
-
-
-                <Button
-                    android:id="@+id/btn_video_speed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="快进"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_video_backup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="后退"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/btn_video_normal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="正常"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-
 
         </LinearLayout>
+
 
     </ScrollView>
 

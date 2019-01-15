@@ -4,19 +4,19 @@ import java.util.List;
 
 /**
  * author: ZhongMing
- * DATE: 2019/1/11 0011
+ * DATE: 2019/1/14 0014
  * Description:
  **/
-public class Computer {
+public class AcceptCommand {
 
     /**
      * From : Server
      * SendTo : client
-     * Time : Fri Jan 11 17:39:36 2019
+     * Time : Mon Jan 14 14:29:49 2019
      * Type : userlist
      * Status : Success
-     * command : null
-     * Msg : ["222222","111111"]
+     * SendCommand : null
+     * Msg : ["111111","222222","333333","444444","555555","666666","33333"]
      */
 
     private String From;
@@ -24,7 +24,7 @@ public class Computer {
     private String Time;
     private String Type;
     private String Status;
-    private Object command;
+    private Object Command;
     private List<String> Msg;
 
     public String getFrom() {
@@ -68,11 +68,11 @@ public class Computer {
     }
 
     public Object getCommand() {
-        return command;
+        return Command;
     }
 
-    public void setCommand(Object command) {
-        this.command = command;
+    public void setCommand(Object Command) {
+        this.Command = Command;
     }
 
     public List<String> getMsg() {

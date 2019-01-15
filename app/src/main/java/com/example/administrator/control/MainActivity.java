@@ -13,12 +13,13 @@ import android.view.MenuItem;
 
 import com.example.administrator.control.activity.LoginActivity;
 import com.example.administrator.control.adapter.ComupterAdapter;
-import com.example.administrator.control.bean.Connect;
-import com.example.administrator.control.bean.ComputerListBean;
+import com.example.administrator.control.bean.SendCommand;
+import com.example.administrator.control.bean.AcceptCommand;
 import com.example.administrator.control.fragment.ControlFragment;
 import com.example.administrator.control.tcp.ClientThread;
 import com.example.administrator.control.util.MessageEvent;
 import com.example.administrator.control.util.SharedPreferencesUtils;
+import com.example.administrator.control.util.TimeUtil;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
@@ -76,8 +77,9 @@ public class MainActivity extends AppCompatActivity {
                 if (messageEvent.getMessage() != null) {
                     System.out.println(messageEvent.getMessage());
                     Gson gson = new Gson();
-                    Object obj = gson.fromJson(messageEvent.getMessage(), ComputerListBean.class);
-                    for (String str : ((ComputerListBean) obj).getMsg()) {
+                    Object obj = gson.fromJson(messageEvent.getMessage(), AcceptCommand.class);
+                    list.add("all");
+                    for (String str : ((AcceptCommand) obj).getMsg()) {
                         list.add(str);
                     }
                     removeDuplicateWithOrder(list);
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 comupterAdapter.setThisPosition(position);
-                Connect connect = new Connect(account, "Connect", list.get(position), "client");
+                SendCommand connect = new SendCommand(account, list.get(position), TimeUtil.nowTime(), "Connect", "client", null, "client");
                 clientThread.sendData(new Gson().toJson(connect));
                 getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(position), clientThread)).commit();
             }
@@ -113,13 +115,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRight() {
-        Connect connect = new Connect(account, "Connect", list.get(0), "client");
+        SendCommand connect = new SendCommand(account, list.get(0), TimeUtil.nowTime(), "Connect", "client", null, "client");
         clientThread.sendData(new Gson().toJson(connect));
         getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(0), clientThread)).commit();
     }
 
     private void logOut() {
-        Connect connect = new Connect(account, "Logout", "server", "client logout");
+        SendCommand connect = new SendCommand(account, "server", TimeUtil.nowTime(), "Logout", "client", null, "client logout");
         clientThread.sendData(new Gson().toJson(connect));
     }
 

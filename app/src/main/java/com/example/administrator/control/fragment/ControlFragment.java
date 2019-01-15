@@ -9,11 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.control.R;
-import com.example.administrator.control.bean.CommandBean;
+import com.example.administrator.control.bean.SendCommand;
 import com.example.administrator.control.tcp.ClientThread;
 import com.example.administrator.control.util.TimeUtil;
 import com.google.gson.Gson;
@@ -93,6 +94,10 @@ public class ControlFragment extends Fragment {
     Button pptLastest;
     @BindView(R.id.ppt_exit)
     Button pptExit;
+    @BindView(R.id.ll_all)
+    LinearLayout llAll;
+    @BindView(R.id.option)
+    LinearLayout llOption;
 
 
     private String compId;
@@ -111,6 +116,13 @@ public class ControlFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.computer_content, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (compId.equals("all")) {
+            llAll.setVisibility(View.VISIBLE);
+            llOption.setVisibility(View.GONE);
+        } else {
+            llAll.setVisibility(View.GONE);
+            llOption.setVisibility(View.VISIBLE);
+        }
         computerId.setText(compId);
         return view;
     }
@@ -123,22 +135,26 @@ public class ControlFragment extends Fragment {
 
 
     public void sendMsg(int kind, int order, String msg) {
-        CommandBean.Command command = new CommandBean.Command(kind, order);
-        CommandBean commandBean = new CommandBean("33333", compId, TimeUtil.nowTime(), "Command", "client", command, msg);
-        thread.sendData(new Gson().toJson(commandBean));
+        SendCommand.Command command = new SendCommand.Command(kind, order);
+        SendCommand sendCommand = new SendCommand(account, compId, TimeUtil.nowTime(), "Command", "client", command, msg);
+        thread.sendData(new Gson().toJson(sendCommand));
     }
 
 
-    @OnClick({R.id.btn_video_normal, R.id.btn_computer_open, R.id.fullscreen, R.id.btn_computer_close, R.id.btn_light_open, R.id.btn_light_close, R.id.btn_img_last, R.id.btn_img_next, R.id.btn_video_open, R.id.btn_video_close, R.id.btn_video_start, R.id.btn_video_stop, R.id.btn_video_up, R.id.btn_video_down, R.id.btn_video_speed, R.id.btn_video_backup, R.id.btn_video_voiceup, R.id.btn_video_voicelow, R.id.btn_video_mute, R.id.btn_img_start, R.id.btn_img_bigger, R.id.btn_img_smaller, R.id.btn_img_full, R.id.btn_img_exit,R.id.ppt_start, R.id.ppt_last, R.id.ppt_next, R.id.ppt_first, R.id.ppt_lastest, R.id.ppt_exit})
+    @OnClick({R.id.btn_video_normal, R.id.btn_computer_open, R.id.fullscreen, R.id.btn_computer_close, R.id.btn_light_open, R.id.btn_light_close, R.id.btn_img_last, R.id.btn_img_next, R.id.btn_video_open, R.id.btn_video_close, R.id.btn_video_start, R.id.btn_video_stop, R.id.btn_video_up, R.id.btn_video_down, R.id.btn_video_speed, R.id.btn_video_backup, R.id.btn_video_voiceup, R.id.btn_video_voicelow, R.id.btn_video_mute, R.id.btn_img_start, R.id.btn_img_bigger, R.id.btn_img_smaller, R.id.btn_img_full, R.id.btn_img_exit, R.id.ppt_start, R.id.ppt_last, R.id.ppt_next, R.id.ppt_first, R.id.ppt_lastest, R.id.ppt_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_computer_open:
+                Toast.makeText(getContext(), "open all", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_computer_close:
+                Toast.makeText(getContext(), "close all", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_light_open:
+                Toast.makeText(getContext(), "open light", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_light_close:
+                Toast.makeText(getContext(), "close light", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_img_last:
                 sendMsg(2, 4, "img last");
@@ -161,7 +177,6 @@ public class ControlFragment extends Fragment {
             case R.id.btn_img_exit:
                 sendMsg(2, 6, "img exit");
                 break;
-
             case R.id.btn_video_open:
                 sendMsg(1, 1, "video open");
                 break;
@@ -202,22 +217,22 @@ public class ControlFragment extends Fragment {
                 sendMsg(1, 10, "video normal");
                 break;
             case R.id.ppt_start:
-                sendMsg(3,1,"ppt start");
+                sendMsg(3, 1, "ppt start");
                 break;
             case R.id.ppt_last:
-                sendMsg(3,2,"ppt last");
+                sendMsg(3, 2, "ppt last");
                 break;
             case R.id.ppt_next:
-                sendMsg(3,3,"ppt next");
+                sendMsg(3, 3, "ppt next");
                 break;
             case R.id.ppt_first:
-                sendMsg(3,4,"ppt first");
+                sendMsg(3, 4, "ppt first");
                 break;
             case R.id.ppt_lastest:
-                sendMsg(3,5,"ppt lastest");
+                sendMsg(3, 5, "ppt lastest");
                 break;
             case R.id.ppt_exit:
-                sendMsg(3,6,"ppt exit");
+                sendMsg(3, 6, "ppt exit");
                 break;
 
         }

@@ -7,7 +7,7 @@ import android.util.Log;
 
 
 import com.example.administrator.control.MyApp;
-import com.example.administrator.control.bean.ComputerBean;
+import com.example.administrator.control.bean.SendCommand;
 import com.example.administrator.control.util.MessageEvent;
 import com.example.administrator.control.util.TimeUtil;
 import com.google.gson.Gson;
@@ -58,15 +58,15 @@ public class ClientThread implements Runnable {
             os = socket.getOutputStream();
             if (socket.isConnected()) {
                 Log.v("sd", "socket已连接");
-                ComputerBean computerBean = new ComputerBean(account, "server", TimeUtil.nowTime(), "Connect", null, null, null);
-                sendData(new Gson().toJson(computerBean));
+                SendCommand sendCommand = new SendCommand(account, "server", TimeUtil.nowTime(), "Connect", null, null, null);
+                sendData(new Gson().toJson(sendCommand));
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             Thread.sleep(1000);
-                            ComputerBean computerBean1 = new ComputerBean(account, "server", TimeUtil.nowTime(), "GetId", "test", "client", "client");
-                            sendData(new Gson().toJson(computerBean1));
+                            SendCommand sendCommand1 = new SendCommand(account, "server", TimeUtil.nowTime(), "GetId", "test", null, "client");
+                            sendData(new Gson().toJson(sendCommand1));
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
