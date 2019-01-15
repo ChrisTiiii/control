@@ -1,4 +1,4 @@
-package com.example.administrator.control;
+package com.example.administrator.control.activity;
 
 import android.os.Bundle;
 import android.os.Message;
@@ -11,6 +11,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 
+import com.example.administrator.control.R;
 import com.example.administrator.control.bean.ComputerBean;
 import com.example.administrator.control.tcp.ClientThread;
 import com.example.administrator.control.util.MessageEvent;
@@ -53,7 +54,7 @@ public class ComputerActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void initSocket() {
-        clientThread = new ClientThread();
+        clientThread = new ClientThread("123");
         new Thread(clientThread).start();
     }
 

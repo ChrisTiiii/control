@@ -40,15 +40,17 @@ public class ClientThread implements Runnable {
 
     //接收UI线程的消息
     public Handler revHandler;
+    private String account;
 
-
-    public ClientThread() {
+    public ClientThread(String account) {
+        this.account = account;
     }
 
     @Override
     public void run() {
         //创建一个无连接的Socket
-        socket = new Socket();
+        if (socket == null)
+            socket = new Socket();
         try {
             //连接到指定的IP和端口号，并指定10s的超时时间
             socket.connect(new InetSocketAddress(IP, SPORT), TIME_OUT);
@@ -56,10 +58,22 @@ public class ClientThread implements Runnable {
             os = socket.getOutputStream();
             if (socket.isConnected()) {
                 Log.v("sd", "socket已连接");
-                ComputerBean computerBean = new ComputerBean("33333", "server", TimeUtil.nowTime(), "Connect", null, null, null);
+                ComputerBean computerBean = new ComputerBean(account, "server", TimeUtil.nowTime(), "Connect", null, null, null);
                 sendData(new Gson().toJson(computerBean));
-                ComputerBean computerBean1 = new ComputerBean("33333", "server", TimeUtil.nowTime(), "GetId", "test", "client", "client");
-                sendData(new Gson().toJson(computerBean1));
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(1000);
+                            ComputerBean computerBean1 = new ComputerBean(account, "server", TimeUtil.nowTime(), "GetId", "test", "client", "client");
+                            sendData(new Gson().toJson(computerBean1));
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+
+
             } else {
                 socket.connect(new InetSocketAddress(IP, SPORT), TIME_OUT);
             }
@@ -91,6 +105,7 @@ public class ClientThread implements Runnable {
                     while ((content = br.readLine()) != null) {
                         MessageEvent messageEvent = new MessageEvent(MyApp.ACCEPPT);
                         messageEvent.setMessage(content);
+                        EventBus.getDefault().post(messageEvent);
                         EventBus.getDefault().post(messageEvent);
                     }
                 } catch (IOException e) {
@@ -130,6 +145,13 @@ public class ClientThread implements Runnable {
             };
             Looper.loop();
         }
+    }
 
+    public void destorySocket() {
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
