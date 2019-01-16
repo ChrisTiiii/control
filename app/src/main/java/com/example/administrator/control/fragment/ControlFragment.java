@@ -103,6 +103,7 @@ public class ControlFragment extends Fragment {
     private String compId;
     private ClientThread thread;
     private String account;
+    private int status;
 
     @SuppressLint("ValidFragment")
     public ControlFragment(String account, String compId, ClientThread thread) {
@@ -134,10 +135,16 @@ public class ControlFragment extends Fragment {
     }
 
 
-    public void sendMsg(int kind, int order, String msg) {
-        SendCommand.Command command = new SendCommand.Command(kind, order);
-        SendCommand sendCommand = new SendCommand(account, compId, TimeUtil.nowTime(), "Command", "client", command, msg);
-        thread.sendData(new Gson().toJson(sendCommand));
+    public void sendMsg(final int kind, final int order, final String msg) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SendCommand.Command command = new SendCommand.Command(kind, order);
+                SendCommand sendCommand = new SendCommand(account, compId, TimeUtil.nowTime(), "Command", "client", command, msg);
+                thread.sendData(new Gson().toJson(sendCommand));
+            }
+        }).start();
+
     }
 
 

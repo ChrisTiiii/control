@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import com.example.administrator.control.activity.LoginActivity;
@@ -27,9 +28,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import butterknife.BindView;
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> list;
     private String account;
     private SharedPreferencesUtils helper;
+    private static int _position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,17 +79,27 @@ public class MainActivity extends AppCompatActivity {
         switch (messageEvent.getTAG()) {
             case MyApp.ACCEPPT:
                 if (messageEvent.getMessage() != null) {
-                    System.out.println(messageEvent.getMessage());
+                    System.out.println("accept:" + messageEvent.getMessage());
                     Gson gson = new Gson();
-                    Object obj = gson.fromJson(messageEvent.getMessage(), AcceptCommand.class);
-                    list.add("all");
-                    for (String str : ((AcceptCommand) obj).getMsg()) {
-                        list.add(str);
-                    }
-                    removeDuplicateWithOrder(list);
-                    comupterAdapter.notifyDataSetChanged();
-                    if (list.size() > 0) {
-                        initRight();
+                    try {
+                        Object obj = gson.fromJson(messageEvent.getMessage(), AcceptCommand.class);
+                        if (((AcceptCommand) obj).getType().equals("userlist")) {
+                            list.add("all");
+                            for (String str : (List<String>) ((AcceptCommand) obj).getMsg()) {
+                                list.add(str);
+                            }
+                            removeDuplicateWithOrder(list);
+                            comupterAdapter.notifyDataSetChanged();
+                            if (list.size() > 0) {
+                                initRight();
+                            }
+                        }
+                        //判断设备是否在线
+                        if (((AcceptCommand) obj).getStatus().equals("error4")) {
+                            Toast.makeText(this, "设备不在线", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
                 break;
@@ -95,10 +109,16 @@ public class MainActivity extends AppCompatActivity {
     private void setClick() {
         comupterAdapter.setOnItemClickListener(new ComupterAdapter.ItemClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(final int position) {
                 comupterAdapter.setThisPosition(position);
-                SendCommand connect = new SendCommand(account, list.get(position), TimeUtil.nowTime(), "Connect", "client", null, "client");
-                clientThread.sendData(new Gson().toJson(connect));
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        _position = position;
+                        SendCommand connect = new SendCommand(account, list.get(position), TimeUtil.nowTime(), "Connect", "client", null, "client");
+                        clientThread.sendData(new Gson().toJson(connect));
+                    }
+                }).start();
                 getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(position), clientThread)).commit();
             }
         });
@@ -115,14 +135,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRight() {
-        SendCommand connect = new SendCommand(account, list.get(0), TimeUtil.nowTime(), "Connect", "client", null, "client");
-        clientThread.sendData(new Gson().toJson(connect));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SendCommand connect = new SendCommand(account, list.get(0), TimeUtil.nowTime(), "Connect", "client", null, "client");
+                clientThread.sendData(new Gson().toJson(connect));
+            }
+        }).start();
         getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(0), clientThread)).commit();
     }
 
     private void logOut() {
-        SendCommand connect = new SendCommand(account, "server", TimeUtil.nowTime(), "Logout", "client", null, "client logout");
-        clientThread.sendData(new Gson().toJson(connect));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SendCommand connect = new SendCommand(account, "server", TimeUtil.nowTime(), "Logout", "client", null, "client logout");
+                clientThread.sendData(new Gson().toJson(connect));
+            }
+        }).start();
     }
 
     // 删除ArrayList中重复元素，保持顺序

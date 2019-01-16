@@ -25,7 +25,7 @@ public class AcceptCommand {
     private String Type;
     private String Status;
     private Object Command;
-    private List<String> Msg;
+    private Object Msg;
 
     public String getFrom() {
         return From;
@@ -75,11 +75,11 @@ public class AcceptCommand {
         this.Command = Command;
     }
 
-    public List<String> getMsg() {
+    public Object getMsg() {
         return Msg;
     }
 
-    public void setMsg(List<String> Msg) {
-        this.Msg = Msg;
+    public void setMsg(Object msg) {
+        Msg = msg;
     }
 }

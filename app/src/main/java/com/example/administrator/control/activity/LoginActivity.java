@@ -40,11 +40,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        if (!getLocalName().equals("")) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra("account", getLocalName());
-            startActivity(intent);
-            finish();
+        System.out.println(getLocalName());
+        if (getLocalName() != null) {
+            if (!getLocalName().equals("")) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("account", getLocalName());
+                startActivity(intent);
+                finish();
+            }
         }
     }
 

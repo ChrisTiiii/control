@@ -80,7 +80,6 @@ public class ClientThread implements Runnable {
             //接收服务端的数据
             br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
             getData();
-//            sendData(null);
         } catch (IOException e) {
             e.printStackTrace();
             if (e instanceof SocketTimeoutException) {
