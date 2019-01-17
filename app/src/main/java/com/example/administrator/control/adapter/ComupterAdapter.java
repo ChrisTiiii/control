@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.control.R;
+import com.example.administrator.control.bean.EqupmentBean;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ import butterknife.ButterKnife;
  **/
 public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.ComputerViewHolder> {
     private Context context;
-    private List<String> list;
+    private List<EqupmentBean> list;
     // 利用接口 -> 给RecyclerView设置点击事件
     private ItemClickListener mItemClickListener;
     //先声明一个int成员变量
@@ -44,7 +45,7 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
         notifyDataSetChanged();
     }
 
-    public ComupterAdapter(Context context, List<String> list) {
+    public ComupterAdapter(Context context, List<EqupmentBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -60,7 +61,7 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
     @Override
     public void onBindViewHolder(@NonNull ComputerViewHolder computerViewHolder, final int position) {
         Glide.with(context).load(R.drawable.computer).into(computerViewHolder.imgComputer);
-        computerViewHolder.tvComputerid.setText(list.get(position));
+        computerViewHolder.tvComputerid.setText(list.get(position).getName());
         // 点击事件一般都写在绑定数据这里，当然写到上边的创建布局时候也是可以的
         if (mItemClickListener != null) {
             computerViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

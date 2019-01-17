@@ -1,6 +1,7 @@
 package com.example.administrator.control.fragment;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.control.R;
+import com.example.administrator.control.bean.EqupmentBean;
 import com.example.administrator.control.bean.SendCommand;
 import com.example.administrator.control.tcp.ClientThread;
 import com.example.administrator.control.util.TimeUtil;
@@ -100,15 +102,14 @@ public class ControlFragment extends Fragment {
     LinearLayout llOption;
 
 
-    private String compId;
+    private EqupmentBean equpBean;
     private ClientThread thread;
     private String account;
-    private int status;
 
     @SuppressLint("ValidFragment")
-    public ControlFragment(String account, String compId, ClientThread thread) {
+    public ControlFragment(String account, EqupmentBean equpBean, ClientThread thread) {
         this.account = account;
-        this.compId = compId;
+        this.equpBean = equpBean;
         this.thread = thread;
     }
 
@@ -117,14 +118,19 @@ public class ControlFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.computer_content, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (compId.equals("all")) {
+        if (equpBean.getName().equals("all")) {
             llAll.setVisibility(View.VISIBLE);
             llOption.setVisibility(View.GONE);
         } else {
             llAll.setVisibility(View.GONE);
             llOption.setVisibility(View.VISIBLE);
         }
-        computerId.setText(compId);
+        if (equpBean.getStatus() != -1)
+            computerId.setText(equpBean.getName() + "设备在线");
+        else {
+            computerId.setTextColor(Color.parseColor("#FA8072"));
+            computerId.setText(equpBean.getName() + "设备不在线");
+        }
         return view;
     }
 
@@ -140,7 +146,7 @@ public class ControlFragment extends Fragment {
             @Override
             public void run() {
                 SendCommand.Command command = new SendCommand.Command(kind, order);
-                SendCommand sendCommand = new SendCommand(account, compId, TimeUtil.nowTime(), "Command", "client", command, msg);
+                SendCommand sendCommand = new SendCommand(account, equpBean.getName(), TimeUtil.nowTime(), "Command", "client", command, msg);
                 thread.sendData(new Gson().toJson(sendCommand));
             }
         }).start();

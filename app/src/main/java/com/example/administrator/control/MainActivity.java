@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.administrator.control.activity.LoginActivity;
 import com.example.administrator.control.adapter.ComupterAdapter;
+import com.example.administrator.control.bean.EqupmentBean;
 import com.example.administrator.control.bean.SendCommand;
 import com.example.administrator.control.bean.AcceptCommand;
 import com.example.administrator.control.fragment.ControlFragment;
@@ -50,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView computerList;
     private ClientThread clientThread;
     private ComupterAdapter comupterAdapter;
-    private List<String> list;
+    private List<EqupmentBean> list;
     private String account;
     private SharedPreferencesUtils helper;
-    private static int _position;
+    private int _position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         if (!EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().register(this);
+        _position = -1;
         Intent intent = getIntent();
         if (intent != null)
             account = intent.getExtras().getString("account");
@@ -84,9 +86,10 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         Object obj = gson.fromJson(messageEvent.getMessage(), AcceptCommand.class);
                         if (((AcceptCommand) obj).getType().equals("userlist")) {
-                            list.add("all");
+                            list.clear();
+                            list.add(new EqupmentBean("all", 1));
                             for (String str : (List<String>) ((AcceptCommand) obj).getMsg()) {
-                                list.add(str);
+                                list.add(new EqupmentBean(str, 1));
                             }
                             removeDuplicateWithOrder(list);
                             comupterAdapter.notifyDataSetChanged();
@@ -95,9 +98,14 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         //判断设备是否在线
-                        if (((AcceptCommand) obj).getStatus().equals("error4")) {
-                            Toast.makeText(this, "设备不在线", Toast.LENGTH_SHORT).show();
-                        }
+                        if (((AcceptCommand) obj).getType().equals("Connect"))
+                            if (((AcceptCommand) obj).getStatus().equals("error4")) {
+                                list.get(_position).setStatus(-1);
+                                Toast.makeText(this, "设备：" + list.get(_position).getName() + "不在线", Toast.LENGTH_SHORT).show();
+                            } else if (((AcceptCommand) obj).getStatus().equals("Success")) {
+                                list.get(_position).setStatus(1);
+                                Toast.makeText(this, "设备：" + list.get(_position).getName() + "在线", Toast.LENGTH_SHORT).show();
+                            }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -115,11 +123,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         _position = position;
-                        SendCommand connect = new SendCommand(account, list.get(position), TimeUtil.nowTime(), "Connect", "client", null, "client");
+                        SendCommand connect = new SendCommand(account, list.get(position).getName(), TimeUtil.nowTime(), "Connect", "client", null, "client");
                         clientThread.sendData(new Gson().toJson(connect));
+                        try {
+                            Thread.sleep(100);
+                            getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(position), clientThread)).commit();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }).start();
-                getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(position), clientThread)).commit();
             }
         });
     }
@@ -138,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SendCommand connect = new SendCommand(account, list.get(0), TimeUtil.nowTime(), "Connect", "client", null, "client");
+                SendCommand connect = new SendCommand(account, list.get(0).getName(), TimeUtil.nowTime(), "Connect", "client", null, "client");
                 clientThread.sendData(new Gson().toJson(connect));
             }
         }).start();
