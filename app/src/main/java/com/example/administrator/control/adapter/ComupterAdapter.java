@@ -15,7 +15,7 @@ import com.example.administrator.control.R;
 import com.example.administrator.control.bean.EqupmentBean;
 
 import java.util.List;
-import java.util.Map;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,18 +30,14 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
     private List<EqupmentBean> list;
     // 利用接口 -> 给RecyclerView设置点击事件
     private ItemClickListener mItemClickListener;
-    //先声明一个int成员变量
-    private int thisPosition;
+    private int _position;
 
-    //再定义一个int类型的返回值方法
-    public int getthisPosition() {
-        return thisPosition;
+    public int getPosition() {
+        return _position;
     }
 
-    //其次定义一个方法用来绑定当前参数值的方法
-    //此方法是在调用此适配器的地方调用的，此适配器内不会被调用到
-    public void setThisPosition(int thisPosition) {
-        this.thisPosition = thisPosition;
+    public void setPosition(int _position) {
+        this._position = _position;
         notifyDataSetChanged();
     }
 
@@ -72,7 +68,7 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
                 }
             });
         }
-        if (position == getthisPosition()) {
+        if (position == getPosition()) {
             computerViewHolder.tvComputerid.setTextColor(Color.parseColor("#FA8072"));
         } else {
             computerViewHolder.tvComputerid.setTextColor(Color.parseColor("#1F1F1F"));

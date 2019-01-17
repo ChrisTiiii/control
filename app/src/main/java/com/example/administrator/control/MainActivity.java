@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     try {
                         Object obj = gson.fromJson(messageEvent.getMessage(), AcceptCommand.class);
+                        //获取列表数据
                         if (((AcceptCommand) obj).getType().equals("userlist")) {
                             list.clear();
                             list.add(new EqupmentBean("all", 1));
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         comupterAdapter.setOnItemClickListener(new ComupterAdapter.ItemClickListener() {
             @Override
             public void onItemClick(final int position) {
-                comupterAdapter.setThisPosition(position);
+                comupterAdapter.setPosition(position);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -179,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
         }
         list.clear();
         list.addAll(newList);
-        System.out.println(" remove duplicate " + list);
     }
 
     @Override
@@ -206,8 +206,6 @@ public class MainActivity extends AppCompatActivity {
                 helper = new SharedPreferencesUtils(this, "setting");
                 //创建一个ContentVa对象（自定义的）
                 helper.putValues(new SharedPreferencesUtils.ContentValue("name", ""));
-//                clientThread.destorySocket();
-//                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
