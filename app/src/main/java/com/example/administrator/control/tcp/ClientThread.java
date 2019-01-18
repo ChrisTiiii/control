@@ -105,7 +105,6 @@ public class ClientThread implements Runnable {
                         MessageEvent messageEvent = new MessageEvent(MyApp.ACCEPPT);
                         messageEvent.setMessage(content);
                         EventBus.getDefault().post(messageEvent);
-                        EventBus.getDefault().post(messageEvent);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

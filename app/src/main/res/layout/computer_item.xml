@@ -5,18 +5,41 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_computerid"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ID"
-        android:textColor="#1F1F1F"
-        android:textSize="25sp" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="ID："
+            android:textColor="#1F1F1F"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tv_computerid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="ID"
+            android:textColor="#1F1F1F"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/img_computer"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="100dp"
+        android:layout_below="@+id/tv_computerid"
+        android:layout_gravity="center"
         android:src="@drawable/computer" />
+
+    <View
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 
 </LinearLayout>

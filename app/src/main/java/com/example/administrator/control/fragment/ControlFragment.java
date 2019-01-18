@@ -100,6 +100,8 @@ public class ControlFragment extends Fragment {
     LinearLayout llAll;
     @BindView(R.id.option)
     LinearLayout llOption;
+    @BindView(R.id.computer_status)
+    TextView computerStatus;
 
 
     private EqupmentBean equpBean;
@@ -118,18 +120,23 @@ public class ControlFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.computer_content, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (equpBean.getName().equals("all")) {
+        if (equpBean.getName().equals("ALL COMPUTER")) {
             llAll.setVisibility(View.VISIBLE);
             llOption.setVisibility(View.GONE);
         } else {
             llAll.setVisibility(View.GONE);
             llOption.setVisibility(View.VISIBLE);
         }
-        if (equpBean.getStatus() != -1)
-            computerId.setText(equpBean.getName() + "设备在线");
-        else {
-            computerId.setTextColor(Color.parseColor("#FA8072"));
-            computerId.setText(equpBean.getName() + "设备不在线");
+        switch (equpBean.getStatus()) {
+            case 1:
+                computerId.setText(equpBean.getName());
+                computerStatus.setText("设备在线");
+                break;
+            case -1:
+                computerStatus.setTextColor(Color.parseColor("#FF0000"));
+                computerId.setText(equpBean.getName());
+                computerStatus.setText("设备不在线");
+                break;
         }
         return view;
     }
@@ -158,10 +165,10 @@ public class ControlFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_computer_open:
-                Toast.makeText(getContext(), "open all", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "open all computer", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_computer_close:
-                Toast.makeText(getContext(), "close all", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "close all computer", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_light_open:
                 Toast.makeText(getContext(), "open light", Toast.LENGTH_SHORT).show();

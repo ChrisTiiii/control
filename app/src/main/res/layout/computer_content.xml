@@ -13,27 +13,43 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:alpha="0.5"
-                android:background="#cdcdcd"
-                android:orientation="horizontal">
+                android:background="#cdcdcd">
 
                 <TextView
+                    android:id="@+id/cc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:layout_alignParentLeft="true"
                     android:paddingLeft="8dp"
-                    android:text="电脑型号:" />
+                    android:text="电脑型号:"
+                    android:textColor="#333"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/computer_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/cc"
+                    android:text="ceshi"
+                    android:textColor="#8A2BE2"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-                    android:text="ceshi" />
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/computer_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="8dp"
+                    android:textColor="#333"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
 
             <LinearLayout
@@ -73,7 +89,10 @@
                     android:alpha="0.5"
                     android:background="#cdcdcd"
                     android:paddingLeft="8dp"
-                    android:text="灯光" />
+                    android:text="灯光"
+                    android:textColor="#333"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -104,7 +123,10 @@
                     android:alpha="0.5"
                     android:background="#cdcdcd"
                     android:paddingLeft="8dp"
-                    android:text="图片" />
+                    android:text="图片"
+                    android:textColor="#333"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -181,7 +203,10 @@
                     android:alpha="0.5"
                     android:background="#cdcdcd"
                     android:paddingLeft="8dp"
-                    android:text="PPT" />
+                    android:text="PPT"
+                    android:textColor="#333"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -247,7 +272,10 @@
                     android:alpha="0.5"
                     android:background="#cdcdcd"
                     android:paddingLeft="8dp"
-                    android:text="视频" />
+                    android:text="视频"
+                    android:textColor="#333"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

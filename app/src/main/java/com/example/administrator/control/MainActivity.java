@@ -20,6 +20,7 @@ import com.example.administrator.control.bean.AcceptCommand;
 import com.example.administrator.control.fragment.ControlFragment;
 import com.example.administrator.control.tcp.ClientThread;
 import com.example.administrator.control.util.MessageEvent;
+import com.example.administrator.control.util.RecycleViewDivider;
 import com.example.administrator.control.util.SharedPreferencesUtils;
 import com.example.administrator.control.util.TimeUtil;
 import com.google.gson.Gson;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         if (intent != null)
             account = intent.getExtras().getString("account");
         initSocket();
+        computerList.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.VERTICAL));
         computerList.setLayoutManager(new LinearLayoutManager(this));
         comupterAdapter = new ComupterAdapter(this, list);
         computerList.setAdapter(comupterAdapter);
@@ -88,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
                         //获取列表数据
                         if (((AcceptCommand) obj).getType().equals("userlist")) {
                             list.clear();
-                            list.add(new EqupmentBean("all", 1));
+                            list.add(new EqupmentBean("ALL COMPUTER", 0));
                             for (String str : (List<String>) ((AcceptCommand) obj).getMsg()) {
-                                list.add(new EqupmentBean(str, 1));
+                                list.add(new EqupmentBean(str, 0));
                             }
                             removeDuplicateWithOrder(list);
                             comupterAdapter.notifyDataSetChanged();
@@ -99,14 +101,18 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         //判断设备是否在线
-                        if (((AcceptCommand) obj).getType().equals("Connect"))
-                            if (((AcceptCommand) obj).getStatus().equals("error4")) {
-                                list.get(_position).setStatus(-1);
-                                Toast.makeText(this, "设备：" + list.get(_position).getName() + "不在线", Toast.LENGTH_SHORT).show();
-                            } else if (((AcceptCommand) obj).getStatus().equals("Success")) {
-                                list.get(_position).setStatus(1);
-                                Toast.makeText(this, "设备：" + list.get(_position).getName() + "在线", Toast.LENGTH_SHORT).show();
+                        if (((AcceptCommand) obj).getType().equals("Connect")) {
+                            switch (((AcceptCommand) obj).getStatus()) {
+                                case "error4":
+                                    list.get(_position).setStatus(-1);
+                                    Toast.makeText(this, "设备：" + list.get(_position).getName() + "不在线", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case "Success":
+                                    list.get(_position).setStatus(1);
+                                    Toast.makeText(this, "设备：" + list.get(_position).getName() + "在线", Toast.LENGTH_SHORT).show();
+                                    break;
                             }
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
