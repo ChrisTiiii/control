@@ -1,5 +1,6 @@
 package com.example.administrator.control.bean;
 
+
 public class EqupmentBean {
     private String name;
     private int status;

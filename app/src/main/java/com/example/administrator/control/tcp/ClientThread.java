@@ -1,9 +1,11 @@
 package com.example.administrator.control.tcp;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import com.example.administrator.control.MyApp;
@@ -72,8 +74,6 @@ public class ClientThread implements Runnable {
                         }
                     }
                 }).start();
-
-
             } else {
                 socket.connect(new InetSocketAddress(IP, SPORT), TIME_OUT);
             }
@@ -119,29 +119,30 @@ public class ClientThread implements Runnable {
 
     //发送数据
     public void sendData(String msg) {
-        System.out.println("send:" + msg);
-        if (msg != null) {
-            try {
-                os.write(msg.getBytes("utf-8"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            //非UI线程，自己创建
-            Looper.prepare();
-            revHandler = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    //将用户输入的内容写入到服务器
-                    try {
-                        os.write(((msg.obj) + "").getBytes("utf-8"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-
-                    }
+        if (socket.isConnected()) {
+            System.out.println("send:" + msg);
+            if (msg != null) {
+                try {
+                    os.write(msg.getBytes("utf-8"));
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            };
-            Looper.loop();
+            } else {
+                //非UI线程，自己创建
+                Looper.prepare();
+                revHandler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        //将用户输入的内容写入到服务器
+                        try {
+                            os.write(((msg.obj) + "").getBytes("utf-8"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                Looper.loop();
+            }
         }
     }
 

@@ -1,6 +1,5 @@
 package com.example.administrator.control.bean;
 
-import java.util.List;
 
 /**
  * author: ZhongMing

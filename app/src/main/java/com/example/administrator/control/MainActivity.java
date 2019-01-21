@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import com.example.administrator.control.bean.AcceptCommand;
 import com.example.administrator.control.fragment.ControlFragment;
 import com.example.administrator.control.tcp.ClientThread;
 import com.example.administrator.control.util.MessageEvent;
+import com.example.administrator.control.util.NetWorkUtil;
 import com.example.administrator.control.util.RecycleViewDivider;
 import com.example.administrator.control.util.SharedPreferencesUtils;
 import com.example.administrator.control.util.TimeUtil;
@@ -44,7 +46,7 @@ import butterknife.ButterKnife;
 /**
  * @Author ZhongMing
  * @Date 2019/1/15 0015 上午 11:22
- * @Description:
+ * @Description: 应用主界面
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private String account;
     private SharedPreferencesUtils helper;
     private int _position;
+    private long exitTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,9 +148,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initSocket() {
-        clientThread = new ClientThread(account);
-        new Thread(clientThread).start();
-        initLeft();
+        if (NetWorkUtil.isNetworkAvailable(this)) {
+            clientThread = new ClientThread(account);
+            new Thread(clientThread).start();
+            initLeft();
+        } else
+            Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
+
     }
 
     public void initLeft() {
@@ -155,24 +162,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRight() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SendCommand connect = new SendCommand(account, list.get(0).getName(), TimeUtil.nowTime(), "Connect", "client", null, "client");
-                clientThread.sendData(new Gson().toJson(connect));
-            }
-        }).start();
-        getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(0), clientThread)).commit();
+        if (NetWorkUtil.isNetworkAvailable(this)) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    SendCommand connect = new SendCommand(account, list.get(0).getName(), TimeUtil.nowTime(), "Connect", "client", null, "client");
+                    clientThread.sendData(new Gson().toJson(connect));
+                }
+            }).start();
+            getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(0), clientThread)).commit();
+        } else
+            Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
     }
 
     private void logOut() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SendCommand connect = new SendCommand(account, "server", TimeUtil.nowTime(), "Logout", "client", null, "client logout");
-                clientThread.sendData(new Gson().toJson(connect));
-            }
-        }).start();
+        if (NetWorkUtil.isNetworkAvailable(this)) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    SendCommand connect = new SendCommand(account, "server", TimeUtil.nowTime(), "Logout", "client", null, "client logout");
+                    clientThread.sendData(new Gson().toJson(connect));
+                }
+            }).start();
+        } else
+            Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
     }
 
     // 删除ArrayList中重复元素，保持顺序
@@ -216,4 +229,22 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000)  //System.currentTimeMillis()无论何时调用，肯定大于2000
+            {
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

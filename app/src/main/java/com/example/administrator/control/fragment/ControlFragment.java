@@ -14,10 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.control.MyApp;
 import com.example.administrator.control.R;
 import com.example.administrator.control.bean.EqupmentBean;
 import com.example.administrator.control.bean.SendCommand;
 import com.example.administrator.control.tcp.ClientThread;
+import com.example.administrator.control.util.NetWorkUtil;
 import com.example.administrator.control.util.TimeUtil;
 import com.google.gson.Gson;
 
@@ -103,7 +105,6 @@ public class ControlFragment extends Fragment {
     @BindView(R.id.computer_status)
     TextView computerStatus;
 
-
     private EqupmentBean equpBean;
     private ClientThread thread;
     private String account;
@@ -114,6 +115,9 @@ public class ControlFragment extends Fragment {
         this.equpBean = equpBean;
         this.thread = thread;
     }
+
+
+
 
     @Nullable
     @Override
@@ -137,6 +141,9 @@ public class ControlFragment extends Fragment {
                 computerId.setText(equpBean.getName());
                 computerStatus.setText("设备不在线");
                 break;
+            case 0:
+                computerId.setText(equpBean.getName());
+                break;
         }
         return view;
     }
@@ -149,15 +156,17 @@ public class ControlFragment extends Fragment {
 
 
     public void sendMsg(final int kind, final int order, final String msg) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SendCommand.Command command = new SendCommand.Command(kind, order);
-                SendCommand sendCommand = new SendCommand(account, equpBean.getName(), TimeUtil.nowTime(), "Command", "client", command, msg);
-                thread.sendData(new Gson().toJson(sendCommand));
-            }
-        }).start();
-
+        if (NetWorkUtil.isNetworkAvailable(getContext())) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    SendCommand.Command command = new SendCommand.Command(kind, order);
+                    SendCommand sendCommand = new SendCommand(account, equpBean.getName(), TimeUtil.nowTime(), "Command", "client", command, msg);
+                    thread.sendData(new Gson().toJson(sendCommand));
+                }
+            }).start();
+        } else
+            Toast.makeText(getContext(), "当前网络不可用", Toast.LENGTH_SHORT).show();
     }
 
 
