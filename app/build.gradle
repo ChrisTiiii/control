@@ -44,4 +44,9 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
+    //时间选择器
+    implementation 'com.contrarywind:Android-PickerView:3.2.7'
+    //弹框
+    implementation 'com.github.f0ris.sweetalert:library:1.5.1'
+
 }

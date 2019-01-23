@@ -117,8 +117,6 @@ public class ControlFragment extends Fragment {
     }
 
 
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -174,15 +172,19 @@ public class ControlFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_computer_open:
+                sendMsg(4, 1, "open computer");
                 Toast.makeText(getContext(), "open all computer", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_computer_close:
+                sendMsg(4, 1, "close computer");
                 Toast.makeText(getContext(), "close all computer", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_light_open:
+                sendMsg(4, 1, "open light");
                 Toast.makeText(getContext(), "open light", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_light_close:
+                sendMsg(4, 1, "close light");
                 Toast.makeText(getContext(), "close light", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_img_last:

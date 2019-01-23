@@ -12,12 +12,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-
 import com.example.administrator.control.activity.LoginActivity;
 import com.example.administrator.control.adapter.ComupterAdapter;
+import com.example.administrator.control.bean.AcceptCommand;
 import com.example.administrator.control.bean.EqupmentBean;
 import com.example.administrator.control.bean.SendCommand;
-import com.example.administrator.control.bean.AcceptCommand;
 import com.example.administrator.control.fragment.ControlFragment;
 import com.example.administrator.control.tcp.ClientThread;
 import com.example.administrator.control.util.MessageEvent;
@@ -32,15 +31,14 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -68,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         if (!EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().register(this);
+
+
         _position = -1;
         Intent intent = getIntent();
         if (intent != null)
@@ -78,6 +78,33 @@ public class MainActivity extends AppCompatActivity {
         comupterAdapter = new ComupterAdapter(this, list);
         computerList.setAdapter(comupterAdapter);
         setClick();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        helper = new SharedPreferencesUtils(this, "setting");
+        //创建一个ContentVa对象（自定义的）
+        String end = helper.getString("end");
+        String def = TimeUtil.getDef(TimeUtil.nowTime(), end);
+        if (!(Integer.parseInt(def) > 0)) {
+            new SweetAlertDialog(this)
+                    .setTitleText("用户须知")
+                    .setContentText("您的软件还没激活授权")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            //获取SharedPreferences对象，使用自定义类的方法来获取对象
+                            helper = new SharedPreferencesUtils(MainActivity.this, "setting");
+                            //创建一个ContentVa对象（自定义的）
+                            helper.putValues(new SharedPreferencesUtils.ContentValue("name", ""));
+                            helper.putValues(new SharedPreferencesUtils.ContentValue("isVal", false));
+                            finish();
+                        }
+                    })
+                    .show();
+        }
     }
 
     //用于接收到的服务端的消息，显示在界面上
@@ -225,6 +252,22 @@ public class MainActivity extends AppCompatActivity {
                 helper = new SharedPreferencesUtils(this, "setting");
                 //创建一个ContentVa对象（自定义的）
                 helper.putValues(new SharedPreferencesUtils.ContentValue("name", ""));
+                finish();
+                break;
+            case R.id.option_normal_2:
+                //获取SharedPreferences对象，使用自定义类的方法来获取对象
+                helper = new SharedPreferencesUtils(this, "setting");
+                //创建一个ContentVa对象（自定义的）
+                String begin = helper.getString("begin");
+                String end = helper.getString("end");
+                String def = TimeUtil.getDef(TimeUtil.nowTime(), end);
+                System.out.println("menu:" + def + "天");
+                if (Integer.parseInt(def) > 0)
+                    new SweetAlertDialog(this)
+                            .setTitleText("激活详情")
+                            .setContentText("起始时间:" + begin + "\n截止时间:" + end + "\n剩余有效期:" + def + "天")
+                            .show();
+                else Toast.makeText(this, "激活码已到期", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
