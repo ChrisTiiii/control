@@ -81,7 +81,6 @@ public class RegisterActivity extends AppCompatActivity {
                     helper.putValues(new SharedPreferencesUtils.ContentValue("begin", begin));
                     helper.putValues(new SharedPreferencesUtils.ContentValue("end", end));
                     helper.putValues(new SharedPreferencesUtils.ContentValue("valid", getTimeDiff()));
-                    helper.putValues(new SharedPreferencesUtils.ContentValue("code", code));
                     helper.putValues(new SharedPreferencesUtils.ContentValue("isVal", true));
                     if (Integer.parseInt(getTimeDiff()) > 0)
                         new SweetAlertDialog(this)

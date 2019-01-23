@@ -66,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         if (!EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().register(this);
-
-
         _position = -1;
         Intent intent = getIntent();
         if (intent != null)
@@ -86,9 +84,12 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         helper = new SharedPreferencesUtils(this, "setting");
         //创建一个ContentVa对象（自定义的）
+        String begin = helper.getString("begin");
         String end = helper.getString("end");
         String def = TimeUtil.getDef(TimeUtil.nowTime(), end);
-        if (!(Integer.parseInt(def) > 0)) {
+        String deft = TimeUtil.getDef(begin, TimeUtil.nowTime());
+        System.out.println("def:" + def + "MAIN:" + deft);
+        if (!(Integer.parseInt(def) > 0) || !(Integer.parseInt(deft) >= 0)) {
             new SweetAlertDialog(this)
                     .setTitleText("用户须知")
                     .setContentText("您的软件还没激活授权")
@@ -261,8 +262,8 @@ public class MainActivity extends AppCompatActivity {
                 String begin = helper.getString("begin");
                 String end = helper.getString("end");
                 String def = TimeUtil.getDef(TimeUtil.nowTime(), end);
-                System.out.println("menu:" + def + "天");
-                if (Integer.parseInt(def) > 0)
+                String deft = TimeUtil.getDef(begin, TimeUtil.nowTime());
+                if (Integer.parseInt(def) > 0 && Integer.parseInt(deft) >= 0)
                     new SweetAlertDialog(this)
                             .setTitleText("激活详情")
                             .setContentText("起始时间:" + begin + "\n截止时间:" + end + "\n剩余有效期:" + def + "天")

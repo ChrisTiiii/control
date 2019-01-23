@@ -40,6 +40,7 @@ public class TimeUtil {
         return df.format(new Date());// new Date()为获取当前系统时间
     }
 
+
     /**
      * 获取注册时间差
      *

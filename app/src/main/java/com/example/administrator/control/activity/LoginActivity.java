@@ -17,6 +17,8 @@ import com.example.administrator.control.R;
 import com.example.administrator.control.util.SharedPreferencesUtils;
 import com.example.administrator.control.util.TimeUtil;
 
+import java.sql.Time;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -68,9 +70,11 @@ public class LoginActivity extends AppCompatActivity {
     private Boolean isVal() {
         helper = new SharedPreferencesUtils(this, "setting");
         if (helper.getString("end") != null) {
+            String begin = helper.getString("begin");
             String end = helper.getString("end");
-            String def = TimeUtil.getDef(TimeUtil.nowTime(), end);
-            if (!(Integer.parseInt(def) > 0)) {
+            String deft = TimeUtil.getDef(begin, TimeUtil.nowTime());//用户是否提前很多
+            String def = TimeUtil.getDef(TimeUtil.nowTime(), end);//剩余有效期
+            if (!(Integer.parseInt(def) > 0) || !(Integer.parseInt(deft) >= 0)) {
                 helper.putValues(new SharedPreferencesUtils.ContentValue("isVal", false));
             }
         }
