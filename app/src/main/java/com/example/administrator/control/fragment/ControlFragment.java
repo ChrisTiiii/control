@@ -10,11 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.administrator.control.MyApp;
 import com.example.administrator.control.R;
 import com.example.administrator.control.bean.EqupmentBean;
 import com.example.administrator.control.bean.SendCommand;
@@ -105,6 +105,21 @@ public class ControlFragment extends Fragment {
     @BindView(R.id.computer_status)
     TextView computerStatus;
 
+    @BindView(R.id.ll_wel)
+    LinearLayout llWel;
+    @BindView(R.id.et_wel1)
+    EditText etWel1;
+    @BindView(R.id.et_wel2)
+    EditText etWel2;
+    @BindView(R.id.et_wel3)
+    EditText etWel3;
+    @BindView(R.id.btn_wel_clear)
+    Button btnWelClear;
+    @BindView(R.id.btn_create_wel)
+    Button btnCreateWel;
+    @BindView(R.id.btn_show_wel)
+    Button btnShowWel;
+
     private EqupmentBean equpBean;
     private ClientThread thread;
     private String account;
@@ -125,9 +140,11 @@ public class ControlFragment extends Fragment {
         if (equpBean.getName().equals("ALL COMPUTER")) {
             llAll.setVisibility(View.VISIBLE);
             llOption.setVisibility(View.GONE);
+            llWel.setVisibility(View.VISIBLE);
         } else {
             llAll.setVisibility(View.GONE);
             llOption.setVisibility(View.VISIBLE);
+            llWel.setVisibility(View.GONE);
         }
         switch (equpBean.getStatus()) {
             case 1:
@@ -168,24 +185,39 @@ public class ControlFragment extends Fragment {
     }
 
 
-    @OnClick({R.id.btn_video_normal, R.id.btn_computer_open, R.id.fullscreen, R.id.btn_computer_close, R.id.btn_light_open, R.id.btn_light_close, R.id.btn_img_last, R.id.btn_img_next, R.id.btn_video_open, R.id.btn_video_close, R.id.btn_video_start, R.id.btn_video_stop, R.id.btn_video_up, R.id.btn_video_down, R.id.btn_video_speed, R.id.btn_video_backup, R.id.btn_video_voiceup, R.id.btn_video_voicelow, R.id.btn_video_mute, R.id.btn_img_start, R.id.btn_img_bigger, R.id.btn_img_smaller, R.id.btn_img_full, R.id.btn_img_exit, R.id.ppt_start, R.id.ppt_last, R.id.ppt_next, R.id.ppt_first, R.id.ppt_lastest, R.id.ppt_exit})
+    @OnClick({R.id.btn_wel_clear, R.id.btn_create_wel, R.id.btn_show_wel, R.id.btn_video_normal, R.id.btn_computer_open, R.id.fullscreen, R.id.btn_computer_close, R.id.btn_light_open, R.id.btn_light_close, R.id.btn_img_last, R.id.btn_img_next, R.id.btn_video_open, R.id.btn_video_close, R.id.btn_video_start, R.id.btn_video_stop, R.id.btn_video_up, R.id.btn_video_down, R.id.btn_video_speed, R.id.btn_video_backup, R.id.btn_video_voiceup, R.id.btn_video_voicelow, R.id.btn_video_mute, R.id.btn_img_start, R.id.btn_img_bigger, R.id.btn_img_smaller, R.id.btn_img_full, R.id.btn_img_exit, R.id.ppt_start, R.id.ppt_last, R.id.ppt_next, R.id.ppt_first, R.id.ppt_lastest, R.id.ppt_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.btn_wel_clear:
+                etWel1.setText("");
+                etWel2.setText("");
+                etWel3.setText("");
+                break;
+            case R.id.btn_create_wel:
+                if (NetWorkUtil.isNetworkAvailable(getContext())) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            SendCommand sendCommand = new SendCommand(account, "Server", TimeUtil.nowTime(), "Wel", "", new SendCommand.Command(-1, -1), "test,asdas,dfdf");
+                            thread.sendData(new Gson().toJson(sendCommand));
+                        }
+                    }).start();
+                } else
+                    Toast.makeText(getContext(), "当前网络不可用", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_show_wel:
+                break;
             case R.id.btn_computer_open:
                 sendMsg(4, 1, "open computer");
-                Toast.makeText(getContext(), "open all computer", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_computer_close:
                 sendMsg(4, 1, "close computer");
-                Toast.makeText(getContext(), "close all computer", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_light_open:
                 sendMsg(4, 1, "open light");
-                Toast.makeText(getContext(), "open light", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_light_close:
                 sendMsg(4, 1, "close light");
-                Toast.makeText(getContext(), "close light", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_img_last:
                 sendMsg(2, 4, "img last");

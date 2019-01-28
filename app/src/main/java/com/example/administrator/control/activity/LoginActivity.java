@@ -17,7 +17,6 @@ import com.example.administrator.control.R;
 import com.example.administrator.control.util.SharedPreferencesUtils;
 import com.example.administrator.control.util.TimeUtil;
 
-import java.sql.Time;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
