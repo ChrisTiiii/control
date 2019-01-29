@@ -9,6 +9,7 @@ import android.app.Application;
  **/
 public class MyApp extends Application {
     public static final int ACCEPPT = 0x24343;
+    public static final int ERROR = 0x34831;
 
     @Override
     public void onCreate() {

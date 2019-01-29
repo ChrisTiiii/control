@@ -81,6 +81,7 @@ public class ClientThread implements Runnable {
             br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
             getData();
         } catch (IOException e) {
+            EventBus.getDefault().post(new MessageEvent(MyApp.ERROR));
             e.printStackTrace();
             if (e instanceof SocketTimeoutException) {
                 Log.v("xx", "连接超时，正在重连");
@@ -109,6 +110,7 @@ public class ClientThread implements Runnable {
                 } catch (IOException e) {
                     e.printStackTrace();
                     if (e instanceof SocketException) {
+                        EventBus.getDefault().post(new MessageEvent(MyApp.ERROR));
                         Log.v("xx", "连接超时，正在重连");
                     }
                 }
@@ -145,6 +147,7 @@ public class ClientThread implements Runnable {
             }
         }
     }
+
 
     public void destorySocket() {
         try {

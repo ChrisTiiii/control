@@ -104,7 +104,6 @@ public class ControlFragment extends Fragment {
     LinearLayout llOption;
     @BindView(R.id.computer_status)
     TextView computerStatus;
-
     @BindView(R.id.ll_wel)
     LinearLayout llWel;
     @BindView(R.id.et_wel1)
@@ -119,46 +118,52 @@ public class ControlFragment extends Fragment {
     Button btnCreateWel;
     @BindView(R.id.btn_show_wel)
     Button btnShowWel;
+    @BindView(R.id.btn_close_wel)
+    Button btnCloseWel;
 
     private EqupmentBean equpBean;
     private ClientThread thread;
     private String account;
 
-    @SuppressLint("ValidFragment")
     public ControlFragment(String account, EqupmentBean equpBean, ClientThread thread) {
         this.account = account;
         this.equpBean = equpBean;
         this.thread = thread;
     }
 
+    public ControlFragment() {
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.computer_content, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (equpBean.getName().equals("ALL COMPUTER")) {
-            llAll.setVisibility(View.VISIBLE);
-            llOption.setVisibility(View.GONE);
-            llWel.setVisibility(View.VISIBLE);
-        } else {
-            llAll.setVisibility(View.GONE);
-            llOption.setVisibility(View.VISIBLE);
-            llWel.setVisibility(View.GONE);
-        }
-        switch (equpBean.getStatus()) {
-            case 1:
-                computerId.setText(equpBean.getName());
-                computerStatus.setText("设备在线");
-                break;
-            case -1:
-                computerStatus.setTextColor(Color.parseColor("#FF0000"));
-                computerId.setText(equpBean.getName());
-                computerStatus.setText("设备不在线");
-                break;
-            case 0:
-                computerId.setText(equpBean.getName());
-                break;
+        if (equpBean != null) {
+            if (equpBean.getName().equals("ALL COMPUTER")) {
+                llAll.setVisibility(View.VISIBLE);
+                llOption.setVisibility(View.GONE);
+                llWel.setVisibility(View.VISIBLE);
+            } else {
+                llAll.setVisibility(View.GONE);
+                llOption.setVisibility(View.VISIBLE);
+                llWel.setVisibility(View.GONE);
+            }
+            switch (equpBean.getStatus()) {
+                case 1:
+                    computerId.setText(equpBean.getName());
+                    computerStatus.setTextColor(Color.parseColor("#FF1493"));
+                    computerStatus.setText("设备在线");
+                    break;
+                case -1:
+                    computerStatus.setTextColor(Color.parseColor("#FF0000"));
+                    computerId.setText(equpBean.getName());
+                    computerStatus.setText("设备不在线");
+                    break;
+                case 0:
+                    computerId.setText(equpBean.getName());
+                    break;
+            }
         }
         return view;
     }
@@ -170,6 +175,13 @@ public class ControlFragment extends Fragment {
     }
 
 
+    /**
+     * 默认发送给具体设备
+     *
+     * @param kind
+     * @param order
+     * @param msg
+     */
     public void sendMsg(final int kind, final int order, final String msg) {
         if (NetWorkUtil.isNetworkAvailable(getContext())) {
             new Thread(new Runnable() {
@@ -184,8 +196,27 @@ public class ControlFragment extends Fragment {
             Toast.makeText(getContext(), "当前网络不可用", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * @param kind
+     * @param order
+     * @param sendTo 指定发送给全部设备
+     * @param msg
+     */
+    public void sendMsg(final int kind, final int order, final String sendTo, final String type, final String msg) {
+        if (NetWorkUtil.isNetworkAvailable(getContext())) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    SendCommand.Command command = new SendCommand.Command(kind, order);
+                    SendCommand sendCommand = new SendCommand(account, sendTo, TimeUtil.nowTime(), type, "client", command, msg);
+                    thread.sendData(new Gson().toJson(sendCommand));
+                }
+            }).start();
+        } else
+            Toast.makeText(getContext(), "当前网络不可用", Toast.LENGTH_SHORT).show();
+    }
 
-    @OnClick({R.id.btn_wel_clear, R.id.btn_create_wel, R.id.btn_show_wel, R.id.btn_video_normal, R.id.btn_computer_open, R.id.fullscreen, R.id.btn_computer_close, R.id.btn_light_open, R.id.btn_light_close, R.id.btn_img_last, R.id.btn_img_next, R.id.btn_video_open, R.id.btn_video_close, R.id.btn_video_start, R.id.btn_video_stop, R.id.btn_video_up, R.id.btn_video_down, R.id.btn_video_speed, R.id.btn_video_backup, R.id.btn_video_voiceup, R.id.btn_video_voicelow, R.id.btn_video_mute, R.id.btn_img_start, R.id.btn_img_bigger, R.id.btn_img_smaller, R.id.btn_img_full, R.id.btn_img_exit, R.id.ppt_start, R.id.ppt_last, R.id.ppt_next, R.id.ppt_first, R.id.ppt_lastest, R.id.ppt_exit})
+    @OnClick({R.id.btn_close_wel, R.id.btn_wel_clear, R.id.btn_create_wel, R.id.btn_show_wel, R.id.btn_video_normal, R.id.btn_computer_open, R.id.fullscreen, R.id.btn_computer_close, R.id.btn_light_open, R.id.btn_light_close, R.id.btn_img_last, R.id.btn_img_next, R.id.btn_video_open, R.id.btn_video_close, R.id.btn_video_start, R.id.btn_video_stop, R.id.btn_video_up, R.id.btn_video_down, R.id.btn_video_speed, R.id.btn_video_backup, R.id.btn_video_voiceup, R.id.btn_video_voicelow, R.id.btn_video_mute, R.id.btn_img_start, R.id.btn_img_bigger, R.id.btn_img_smaller, R.id.btn_img_full, R.id.btn_img_exit, R.id.ppt_start, R.id.ppt_last, R.id.ppt_next, R.id.ppt_first, R.id.ppt_lastest, R.id.ppt_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_wel_clear:
@@ -194,18 +225,26 @@ public class ControlFragment extends Fragment {
                 etWel3.setText("");
                 break;
             case R.id.btn_create_wel:
-                if (NetWorkUtil.isNetworkAvailable(getContext())) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            SendCommand sendCommand = new SendCommand(account, "Server", TimeUtil.nowTime(), "Wel", "", new SendCommand.Command(-1, -1), "test,asdas,dfdf");
-                            thread.sendData(new Gson().toJson(sendCommand));
-                        }
-                    }).start();
-                } else
-                    Toast.makeText(getContext(), "当前网络不可用", Toast.LENGTH_SHORT).show();
+                String wel1 = etWel1.getText().toString();
+                String wel2 = etWel2.getText().toString();
+                String wel3 = etWel3.getText().toString();
+                if (wel1 == null || wel1.equals("")) {
+                    wel1 = "热烈欢迎";
+                }
+                if (wel2 == null || wel2.equals("")) {
+                    wel2 = "江苏三棱智慧物联发展股份有限公司";
+                }
+                if (wel3 == null || wel3.equals("")) {
+                    wel3 = "莅临我司参观指导";
+                }
+                final String temp = wel1 + "," + wel2 + "," + wel3;
+                sendMsg(-1, -1, "All", "Wel", temp);
                 break;
             case R.id.btn_show_wel:
+                sendMsg(5, 1, "All", "Command", "open welcome");
+                break;
+            case R.id.btn_close_wel:
+                sendMsg(5, 2, "All", "Command", "close welcome");
                 break;
             case R.id.btn_computer_open:
                 sendMsg(4, 1, "open computer");

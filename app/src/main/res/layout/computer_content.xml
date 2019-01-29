@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/cc"
-                    android:text="ceshi"
+                    android:text="网络连接出错"
                     android:textColor="#8A2BE2"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -104,26 +104,29 @@
 
                     <EditText
                         android:id="@+id/et_wel1"
-                        android:hint="热烈欢迎"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="热烈欢迎"
                         android:padding="18dp"
+                        android:singleLine="true"
                         android:textSize="22sp" />
 
                     <EditText
                         android:id="@+id/et_wel2"
-                        android:hint="江苏三棱智慧物联发展股份有限公司"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="江苏三棱智慧物联发展股份有限公司"
                         android:padding="18dp"
+                        android:singleLine="true"
                         android:textSize="22sp" />
 
                     <EditText
                         android:id="@+id/et_wel3"
-                        android:hint="莅临我司指导参观"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="莅临我司参观指导"
                         android:padding="18dp"
+                        android:singleLine="true"
                         android:textSize="22sp" />
 
                     <RelativeLayout
@@ -151,6 +154,14 @@
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@id/btn_create_wel"
                             android:text="打开"
+                            android:textSize="22sp" />
+
+                        <Button
+                            android:id="@+id/btn_close_wel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/btn_show_wel"
+                            android:text="关闭"
                             android:textSize="22sp" />
 
                     </RelativeLayout>

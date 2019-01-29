@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         comupterAdapter = new ComupterAdapter(this, list);
         computerList.setAdapter(comupterAdapter);
         setClick();
-
     }
 
     @Override
@@ -112,6 +111,9 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void setData(MessageEvent messageEvent) {
         switch (messageEvent.getTAG()) {
+            case MyApp.ERROR:
+                reConnect();
+                break;
             case MyApp.ACCEPPT:
                 if (messageEvent.getMessage() != null) {
                     System.out.println("accept:" + messageEvent.getMessage());
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                                 list.add(new EqupmentBean(str, 0));
                             }
                             removeDuplicateWithOrder(list);
-                            comupterAdapter.notifyDataSetChanged();
+                            comupterAdapter.update(list);
                             if (list.size() > 0) {
                                 initRight();
                             }
@@ -177,12 +179,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initSocket() {
         if (NetWorkUtil.isNetworkAvailable(this)) {
+            initLeft();
             clientThread = new ClientThread(account);
             new Thread(clientThread).start();
-            initLeft();
         } else
             Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
-
     }
 
     public void initLeft() {
@@ -217,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 删除ArrayList中重复元素，保持顺序
-    public static void removeDuplicateWithOrder(List list) {
+    public void removeDuplicateWithOrder(List list) {
         Set set = new HashSet();
         List newList = new ArrayList();
         for (Iterator iter = list.iterator(); iter.hasNext(); ) {
@@ -270,6 +271,9 @@ public class MainActivity extends AppCompatActivity {
                             .show();
                 else Toast.makeText(this, "激活码已到期", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.option_normal_3:
+                reConnect();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -289,6 +293,34 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 重新连接
+     */
+    public void reConnect() {
+        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(this).setTitleText("即将断开连接")
+                .setContentText("尝试重新连接")
+                .setCancelText("取消")
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismiss();
+                    }
+                })
+                .setConfirmText("确认")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment()).commit();
+                        clientThread.destorySocket();
+                        list.clear();
+                        comupterAdapter.update(list);
+                        initSocket();
+                        sweetAlertDialog.dismiss();
+                    }
+                });
+        sweetAlertDialog.show();
     }
 
 }

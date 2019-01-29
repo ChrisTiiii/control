@@ -32,6 +32,11 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
     private ItemClickListener mItemClickListener;
     private int _position;
 
+    public void update(List<EqupmentBean> list) {
+        this.list = list;
+        notifyDataSetChanged();
+    }
+
     public int getPosition() {
         return _position;
     }

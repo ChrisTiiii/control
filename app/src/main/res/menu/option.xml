@@ -9,4 +9,8 @@
         android:id="@+id/option_normal_2"
         android:title="有效期"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/option_normal_3"
+        android:title="重新连接服务器"
+        app:showAsAction="never" />
 </menu>
