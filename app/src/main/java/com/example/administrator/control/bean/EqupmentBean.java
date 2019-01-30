@@ -3,7 +3,7 @@ package com.example.administrator.control.bean;
 
 public class EqupmentBean {
     private String name;
-    private int status;
+    private int status;//-1为断开，1为连接
 
     public EqupmentBean(String name, int status) {
         this.name = name;

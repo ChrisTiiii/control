@@ -1,52 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:background="@drawable/login_bk">
 
 
-    <LinearLayout
-        android:id="@+id/ll_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/ll_new"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            app:counterEnabled="true"
-            app:counterMaxLength="12">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/et_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="登录账号"
-                android:inputType="number"
-                android:maxLines="1"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="登录" />
-
-    </LinearLayout>
-
-
-    <Button
-        android:id="@+id/btn_register"
+    <RelativeLayout
+        android:id="@+id/rlt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="激活" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="177dp"
+        android:layout_marginEnd="137dp">
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/ll_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/CustomAppTheme_textinputLayout"
+                app:counterEnabled="true"
+                app:counterMaxLength="12">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_login"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="登录账号"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/login_btn"
+                android:text="登录  >>"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="624dp"
+            android:layout_marginTop="229dp"
+            android:background="@drawable/login_btn"
+            android:text="激活  >>"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/rlt"
+        android:layout_alignStart="@+id/rlt"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/login_btn2" />
+
+</RelativeLayout>

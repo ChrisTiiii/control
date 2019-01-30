@@ -1,26 +1,52 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:background="@drawable/main_bk">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/computer_list"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="11dp"
+        android:gravity="center|right">
 
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="#cdcdcd" />
+        <Button
+            android:id="@+id/menu1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/menu" />
+    </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/right_fragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/computer_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="50dp" />
+
+        <!--<View-->
+        <!--android:layout_width="1dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="#cdcdcd" />-->
+
+        <RelativeLayout
+            android:id="@+id/right_fragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:paddingLeft="50dp"
+            android:paddingTop="50dp">
+
+        </RelativeLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -6,23 +6,26 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
+            android:gravity="center|right"
             android:text="ID："
-            android:textColor="#1F1F1F"
+            android:textColor="@color/white"
             android:textSize="25sp" />
 
         <TextView
             android:id="@+id/tv_computerid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
+            android:gravity="center|left"
             android:text="ID"
             android:textColor="#1F1F1F"
             android:textSize="25sp" />
@@ -36,7 +39,7 @@
         android:layout_height="100dp"
         android:layout_below="@+id/tv_computerid"
         android:layout_gravity="center"
-        android:src="@drawable/computer" />
+        android:src="@drawable/all_before" />
 
     <View
         android:layout_width="30dp"

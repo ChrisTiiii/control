@@ -17,9 +17,9 @@
 
     <application
         android:name="com.example.administrator.control.MyApp"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/sanleng"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/sanleng"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
@@ -28,6 +28,7 @@
             <intent-filter>
                 <action android:name="com.example.administrator.control.activity.LoginActivity" />
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

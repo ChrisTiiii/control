@@ -61,9 +61,14 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
 
     @Override
     public void onBindViewHolder(@NonNull ComputerViewHolder computerViewHolder, final int position) {
-        Glide.with(context).load(R.drawable.computer).into(computerViewHolder.imgComputer);
+        if (position != 0) {
+            if (list.get(position).getStatus() == 1) {
+                Glide.with(context).load(R.drawable.online_before).into(computerViewHolder.imgComputer);
+            } else
+                Glide.with(context).load(R.drawable.offline_before).into(computerViewHolder.imgComputer);
+        } else
+            Glide.with(context).load(R.drawable.all_before).into(computerViewHolder.imgComputer);
         computerViewHolder.tvComputerid.setText(list.get(position).getName());
-        // 点击事件一般都写在绑定数据这里，当然写到上边的创建布局时候也是可以的
         if (mItemClickListener != null) {
             computerViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,10 +78,30 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
                 }
             });
         }
+        //被选中
         if (position == getPosition()) {
-            computerViewHolder.tvComputerid.setTextColor(Color.parseColor("#FA8072"));
-        } else {
-            computerViewHolder.tvComputerid.setTextColor(Color.parseColor("#1F1F1F"));
+            computerViewHolder.tvComputerid.setTextColor(Color.parseColor("#f5df25"));
+            if (position != 0) {
+                if (list.get(position).getStatus() == 1) {
+                    Glide.with(context).load(R.drawable.online_after).into(computerViewHolder.imgComputer);
+                } else {
+                    Glide.with(context).load(R.drawable.offline_after).into(computerViewHolder.imgComputer);
+                }
+            } else {
+                Glide.with(context).load(R.drawable.all_after).into(computerViewHolder.imgComputer);
+            }
+        } else {//未被选中
+            computerViewHolder.tvComputerid.setTextColor(Color.parseColor("#ffffff"));
+            if (position != 0) {
+                if (list.get(position).getStatus() == 1) {
+                    Glide.with(context).load(R.drawable.online_before).into(computerViewHolder.imgComputer);
+                } else {
+                    Glide.with(context).load(R.drawable.offline_before).into(computerViewHolder.imgComputer);
+                }
+            } else {
+                Glide.with(context).load(R.drawable.all_before).into(computerViewHolder.imgComputer);
+            }
+
         }
     }
 

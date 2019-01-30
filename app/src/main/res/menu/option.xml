@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/option_normal_1"
+        android:id="@+id/option_login_lout"
         android:title="退出登录"
         app:showAsAction="never" />
     <item
-        android:id="@+id/option_normal_2"
+        android:id="@+id/option_date"
         android:title="有效期"
         app:showAsAction="never" />
     <item
-        android:id="@+id/option_normal_3"
+        android:id="@+id/option_connect"
         android:title="重新连接服务器"
         app:showAsAction="never" />
 </menu>

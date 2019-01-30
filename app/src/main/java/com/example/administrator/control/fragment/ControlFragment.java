@@ -140,7 +140,7 @@ public class ControlFragment extends Fragment {
         View view = inflater.inflate(R.layout.computer_content, container, false);
         unbinder = ButterKnife.bind(this, view);
         if (equpBean != null) {
-            if (equpBean.getName().equals("ALL COMPUTER")) {
+            if (equpBean.getName().equals("全部设备")) {
                 llAll.setVisibility(View.VISIBLE);
                 llOption.setVisibility(View.GONE);
                 llWel.setVisibility(View.VISIBLE);
@@ -152,7 +152,7 @@ public class ControlFragment extends Fragment {
             switch (equpBean.getStatus()) {
                 case 1:
                     computerId.setText(equpBean.getName());
-                    computerStatus.setTextColor(Color.parseColor("#FF1493"));
+                    computerStatus.setTextColor(Color.parseColor("#f5df25"));
                     computerStatus.setText("设备在线");
                     break;
                 case -1:
@@ -166,12 +166,6 @@ public class ControlFragment extends Fragment {
             }
         }
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
 
@@ -340,5 +334,9 @@ public class ControlFragment extends Fragment {
         }
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }
