@@ -122,6 +122,7 @@ public class ClientThread implements Runnable {
     //发送数据
     public void sendData(String msg) {
         if (socket.isConnected()) {
+            msg += "\0";
             System.out.println("send:" + msg);
             if (msg != null) {
                 try {

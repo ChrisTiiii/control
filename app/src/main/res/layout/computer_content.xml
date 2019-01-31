@@ -638,7 +638,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
                         <Button
                             android:id="@+id/ppt_next"
@@ -909,17 +910,17 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/btn_video_speed"
+                            android:id="@+id/btn_video_normal"
                             android:layout_width="55dp"
                             android:layout_height="55dp"
-                            android:background="@drawable/speed"
+                            android:background="@drawable/normal"
                             android:textSize="22sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingTop="10dp"
-                            android:text="快进"
+                            android:text="正常"
                             android:textColor="@color/white"
                             android:textSize="20sp" />
                     </LinearLayout>
@@ -955,17 +956,17 @@
                         android:paddingLeft="10dp">
 
                         <Button
-                            android:id="@+id/btn_video_normal"
+                            android:id="@+id/btn_video_speed"
                             android:layout_width="55dp"
                             android:layout_height="55dp"
-                            android:background="@drawable/normal"
+                            android:background="@drawable/speed"
                             android:textSize="22sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingTop="10dp"
-                            android:text="正常"
+                            android:text="快进"
                             android:textColor="@color/white"
                             android:textSize="20sp" />
                     </LinearLayout>
