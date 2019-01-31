@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private int _position;
     private long exitTime = 0;
 
-    final String[] items = new String[]{"退出登录", "有效期", "重新连接"};//创建item
+    final String[] items = new String[]{"重新连接", "有效期", "退出登录"};//创建item
 
 
     @Override
@@ -334,7 +334,12 @@ public class MainActivity extends AppCompatActivity {
                             list.clear();
                             comupterAdapter.update(list);
                             initSocket();
-                            sweetAlertDialog.dismiss();
+                            try {
+                                Thread.sleep(100);
+                                sweetAlertDialog.dismiss();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
             sweetAlertDialog.setCancelable(false);
@@ -371,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.menu,R.id.menu1})
+    @OnClick({R.id.menu, R.id.menu1})
     public void onViewClicked() {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle("工具栏")
@@ -379,17 +384,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         switch (i) {
-                            case 0:
-                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                                logOut();
-                                //获取SharedPreferences对象，使用自定义类的方法来获取对象
-                                helper = new SharedPreferencesUtils(MainActivity.this, "setting");
-                                //创建一个ContentVa对象（自定义的）
-                                helper.putValues(new SharedPreferencesUtils.ContentValue("name", ""));
-                                clientThread.destorySocket();
-                                finish();
+                            case 0://重新连接
+                                reConnect();
                                 break;
-                            case 1:
+                            case 1://有效期
                                 //获取SharedPreferences对象，使用自定义类的方法来获取对象
                                 helper = new SharedPreferencesUtils(MainActivity.this, "setting");
                                 //创建一个ContentVa对象（自定义的）
@@ -405,8 +403,15 @@ public class MainActivity extends AppCompatActivity {
                                 else
                                     Toast.makeText(MainActivity.this, "激活码已到期", Toast.LENGTH_SHORT).show();
                                 break;
-                            case 2:
-                                reConnect();
+                            case 2://退出登录
+                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                                logOut();
+                                //获取SharedPreferences对象，使用自定义类的方法来获取对象
+                                helper = new SharedPreferencesUtils(MainActivity.this, "setting");
+                                //创建一个ContentVa对象（自定义的）
+                                helper.putValues(new SharedPreferencesUtils.ContentValue("name", ""));
+                                clientThread.destorySocket();
+                                finish();
                                 break;
                         }
                     }

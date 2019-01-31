@@ -90,7 +90,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                        finish();
+                                        try {
+                                            Thread.sleep(100);
+                                            finish();
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 })
                                 .show();

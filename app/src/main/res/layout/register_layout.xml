@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bk">
 
 
     <RelativeLayout
@@ -11,7 +12,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:paddingLeft="18dp"
-        android:paddingTop="20dp">
+        android:paddingTop="100dp">
 
         <LinearLayout
             android:id="@+id/ll_begin"
@@ -25,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:text="+选择起始时间"
-                android:textColor="@color/steelblue"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
@@ -36,6 +37,7 @@
                 android:layout_toRightOf="@+id/btn_begin_time"
                 android:gravity="center"
                 android:paddingLeft="18dp"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
         </LinearLayout>
 
@@ -53,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:text="+选择终止时间"
-                android:textColor="@color/steelblue"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
@@ -64,6 +66,7 @@
                 android:layout_toRightOf="@+id/btn_end_time"
                 android:gravity="center"
                 android:paddingLeft="18dp"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
         </LinearLayout>
 
@@ -75,7 +78,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl"
-        android:paddingLeft="18dp">
+        android:paddingLeft="18dp"
+        android:paddingBottom="50dp">
 
         <TextView
             android:id="@+id/tv_tt"
@@ -86,7 +90,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="11dp"
             android:text="激活码："
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:textSize="22sp" />
 
         <RelativeLayout
@@ -99,11 +103,12 @@
             <EditText
                 android:id="@+id/et1"
                 android:layout_width="100dp"
-                android:text="ssss"
                 android:layout_height="wrap_content"
                 android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:gravity="center"
                 android:maxLength="4"
+                android:text="ssss"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
 
             <ImageView
@@ -120,11 +125,12 @@
                 android:id="@+id/et_2"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="llll"
                 android:layout_toRightOf="@+id/line1"
                 android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:gravity="center"
                 android:maxLength="4"
+                android:text="llll"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
 
 
@@ -142,11 +148,12 @@
                 android:id="@+id/et3"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="kkkk"
                 android:layout_toRightOf="@id/line2"
                 android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:gravity="center"
                 android:maxLength="4"
+                android:text="kkkk"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
 
             <ImageView
@@ -164,10 +171,11 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/line3"
-                android:text="jjjj"
                 android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:gravity="center"
                 android:maxLength="4"
+                android:text="jjjj"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
 
         </RelativeLayout>
@@ -177,10 +185,12 @@
 
     <Button
         android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/rl2"
         android:layout_centerHorizontal="true"
-        android:text="激活" />
+        android:background="@drawable/login_btn"
+        android:text="激活"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

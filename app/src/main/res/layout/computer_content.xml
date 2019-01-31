@@ -11,12 +11,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingRight="20dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/ding">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/cc"
@@ -61,19 +61,52 @@
                 android:padding="18dp">
 
 
-                <Button
-                    android:id="@+id/btn_computer_open"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="打开"
-                    android:textSize="22sp" />
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btn_computer_close"
+                    <Button
+                        android:id="@+id/btn_computer_open"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:background="@drawable/open"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="打开"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="关闭"
-                    android:textSize="22sp" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                    <Button
+                        android:id="@+id/btn_computer_close"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:background="@drawable/close"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="关闭"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -84,16 +117,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/ding"
+                    android:background="@color/item"
                     android:paddingLeft="8dp"
                     android:text="设置欢迎词"
                     android:textColor="@color/white"
-
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -132,42 +166,107 @@
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                        <Button
-                            android:id="@+id/btn_wel_clear"
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="清空"
-                            android:textSize="22sp" />
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                        <Button
-                            android:id="@+id/btn_create_wel"
+                            <Button
+                                android:id="@+id/btn_create_wel"
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:background="@drawable/create"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"
+                                android:text="生成"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/btn_wel_clear"
-                            android:text="生成"
-                            android:textSize="22sp" />
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="10dp">
 
-                        <Button
-                            android:id="@+id/btn_show_wel"
+                            <Button
+                                android:id="@+id/btn_wel_clear"
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:background="@drawable/clear"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"
+                                android:text="清空"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/btn_create_wel"
-                            android:text="打开"
-                            android:textSize="22sp" />
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="10dp">
 
-                        <Button
-                            android:id="@+id/btn_close_wel"
+                            <Button
+                                android:id="@+id/btn_show_wel"
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:background="@drawable/open"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"
+                                android:text="打开"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/btn_show_wel"
-                            android:text="关闭"
-                            android:textSize="22sp" />
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="10dp">
 
-                    </RelativeLayout>
+                            <Button
+                                android:id="@+id/btn_close_wel"
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:background="@drawable/close"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"
+                                android:text="关闭"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -182,8 +281,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/ding"
-
+                    android:background="@color/item"
                     android:paddingLeft="8dp"
                     android:text="灯光"
                     android:textColor="@color/white"
@@ -197,26 +295,61 @@
                     android:padding="18dp">
 
 
-                    <Button
-                        android:id="@+id/btn_light_open"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="打开"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btn_light_close"
+                        <Button
+                            android:id="@+id/btn_light_open"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/open"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="关闭"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="关闭"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <Button
+                            android:id="@+id/btn_light_close"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/close"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="关闭"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/ding"
+                    android:background="@color/item"
                     android:paddingLeft="8dp"
                     android:text="图片"
                     android:textColor="@color/white"
@@ -229,26 +362,77 @@
                     android:orientation="horizontal"
                     android:padding="18dp">
 
-                    <Button
-                        android:id="@+id/btn_img_start"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="播放"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btn_img_full"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="全屏"
-                        android:textSize="22sp" />
+                        <Button
+                            android:id="@+id/btn_img_start"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/start"
+                            android:textSize="22sp" />
 
-                    <Button
-                        android:id="@+id/btn_img_exit"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="播放"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="退出"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <Button
+                            android:id="@+id/btn_img_full"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/full_screen"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="全屏"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <Button
+                            android:id="@+id/btn_img_exit"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/quit"
+                            android:paddingLeft="10dp"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="退出"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -259,34 +443,99 @@
                     android:orientation="horizontal"
                     android:padding="18dp">
 
-
-                    <Button
-                        android:id="@+id/btn_img_last"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="上一张"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btn_img_next"
+                        <Button
+                            android:id="@+id/btn_img_last"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/last"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="上一张"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="下一张"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/btn_img_bigger"
+                        <Button
+                            android:id="@+id/btn_img_next"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/next"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="下一张"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="放大+"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/btn_img_smaller"
+                        <Button
+                            android:id="@+id/btn_img_bigger"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/biger"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="放大"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="缩小-"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <Button
+                            android:id="@+id/btn_img_smaller"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/smaller"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="缩小"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
@@ -294,7 +543,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/ding"
+                    android:background="@color/item"
                     android:paddingLeft="8dp"
                     android:text="PPT"
                     android:textColor="@color/white"
@@ -307,19 +556,53 @@
                     android:orientation="horizontal"
                     android:padding="18dp">
 
-                    <Button
-                        android:id="@+id/ppt_start"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="播放"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/ppt_exit"
+                        <Button
+                            android:id="@+id/ppt_start"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/start"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="播放"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="退出"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <Button
+                            android:id="@+id/ppt_exit"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/quit"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="退出"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -328,34 +611,99 @@
                     android:orientation="horizontal"
                     android:padding="18dp">
 
-
-                    <Button
-                        android:id="@+id/ppt_last"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="上一张"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/ppt_next"
+                        <Button
+                            android:id="@+id/ppt_last"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/last"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="上一张"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="下一张"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/ppt_first"
+                        <Button
+                            android:id="@+id/ppt_next"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/next"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="下一张"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="第一张"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/ppt_lastest"
+                        <Button
+                            android:id="@+id/ppt_first"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/first"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="第一张"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="最后"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <Button
+                            android:id="@+id/ppt_lastest"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/lastest"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="最后"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
@@ -363,7 +711,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/ding"
+                    android:background="@color/item"
                     android:paddingLeft="8dp"
                     android:text="视频"
                     android:textColor="@color/white"
@@ -376,34 +724,97 @@
                     android:orientation="horizontal"
                     android:padding="18dp">
 
-                    <Button
-                        android:id="@+id/btn_video_open"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="打开"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btn_video_open"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/open"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="打开"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
 
 
-                    <Button
-                        android:id="@+id/btn_video_close"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="关闭"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/btn_video_start"
+                        <Button
+                            android:id="@+id/btn_video_close"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/close"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="关闭"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="开始"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/btn_video_stop"
+                        <Button
+                            android:id="@+id/btn_video_start"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/start"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="开始"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="暂停"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <Button
+                            android:id="@+id/btn_video_stop"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/stop"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="暂停"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -414,27 +825,73 @@
                     android:orientation="horizontal"
                     android:padding="18dp">
 
-
-                    <Button
-                        android:id="@+id/btn_video_voiceup"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="音量+"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btn_video_voicelow"
+                        <Button
+                            android:id="@+id/btn_video_voiceup"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/volume_up"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="音量+"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="音量-"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/btn_video_mute"
+                        <Button
+                            android:id="@+id/btn_video_voicelow"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/volume_down"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="音量-"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="静音"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <Button
+                            android:id="@+id/btn_video_mute"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/quite"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="静音"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -445,27 +902,74 @@
                     android:orientation="horizontal"
                     android:padding="18dp">
 
-
-                    <Button
-                        android:id="@+id/btn_video_speed"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="快进"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btn_video_backup"
+                        <Button
+                            android:id="@+id/btn_video_speed"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/speed"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="快进"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="后退"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/btn_video_normal"
+                        <Button
+                            android:id="@+id/btn_video_backup"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/retreat"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="后退"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="正常"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <Button
+                            android:id="@+id/btn_video_normal"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/normal"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="正常"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
@@ -475,37 +979,75 @@
                     android:orientation="horizontal"
                     android:padding="18dp">
 
-                    <Button
-                        android:id="@+id/btn_video_up"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="上一个"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btn_video_down"
+                        <Button
+                            android:id="@+id/btn_video_up"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/last"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="上一个"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="下一个"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/fullscreen"
+                        <Button
+                            android:id="@+id/btn_video_down"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/next"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="下一个"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="全屏"
-                        android:textSize="22sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
+                        <Button
+                            android:id="@+id/fullscreen"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/full_screen"
+                            android:textSize="22sp" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="全屏"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
                 </LinearLayout>
-
-
             </LinearLayout>
-
         </LinearLayout>
-
-
     </ScrollView>
-
-
 </LinearLayout>

@@ -151,4 +151,5 @@
     <color name="black">#000000</color> <!-- 黑色 -->
     <color name="check">#f5df25</color>
     <color name="ding">#149dde</color>
+    <color name="item">#1389cb</color>
 </resources>
