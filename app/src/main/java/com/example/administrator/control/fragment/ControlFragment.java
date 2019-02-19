@@ -126,6 +126,7 @@ public class ControlFragment extends Fragment {
     private ClientThread thread;
     private ControlThread controlThread;
     private String account;
+    private String orders[];
 
     public ControlFragment(String account, EqupmentBean equpBean, ClientThread thread, ControlThread controlThread) {
         this.account = account;
@@ -217,12 +218,19 @@ public class ControlFragment extends Fragment {
      * 发送指令给继电器
      * "aa0a0101010101010101010101010101010101bb"
      */
-    public void sendOrder(final String order) {
+    public void sendOrder(final String[] orders) {
         if (NetWorkUtil.isNetworkAvailable(getContext())) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    controlThread.sendData(order);
+                    for (int i = 0; i < orders.length; i++) {
+                        controlThread.sendData(orders[i]);
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }).start();
         } else
@@ -261,16 +269,22 @@ public class ControlFragment extends Fragment {
                 sendMsg(5, 2, "All", "Command", "close welcome");
                 break;
             case R.id.btn_computer_open:
-                sendOrder("aa0a0101010101010101010101010101010101bb");
+                orders = new String[]{"aa0a0101010101010101010101010101010101bb"};
+                sendOrder(orders);
                 break;
             case R.id.btn_computer_close:
-                sendOrder("aa0b0202020202020202020202020202020201bb");
+                orders = new String[]{"aa0b0202020202020202020202020202020201bb"};
+                sendOrder(orders);
                 break;
             case R.id.btn_light_open:
-                sendMsg(4, 1, "open light");
+                orders = new String[]{"aa0f0001010101010101010101010101010101bb", "aa0f0101010101010101010101010101010101bb", "aa0f0201010101010101010101010101010101bb", "aa0f0301010101010101010101010101010101bb"};
+                sendOrder(orders);
+//                sendMsg(4, 1, "open light");
                 break;
             case R.id.btn_light_close:
-                sendMsg(4, 1, "close light");
+                orders = new String[]{"aa0f0002010101010101010101010101010101bb", "aa0f0102010101010101010101010101010101bb", "aa0f0202010101010101010101010101010101bb", "aa0f0302010101010101010101010101010101bb"};
+                sendOrder(orders);
+//                sendMsg(4, 1, "close light");
                 break;
             case R.id.btn_img_last:
                 sendMsg(2, 4, "img last");

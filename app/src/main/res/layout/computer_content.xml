@@ -268,7 +268,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="10dp"
                                 android:text="关闭"
-                                android:textColor="@color/white"
+                                 android:textColor="@color/white"
                                 android:textSize="20sp" />
                         </LinearLayout>
                     </LinearLayout>

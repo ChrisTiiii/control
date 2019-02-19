@@ -6,11 +6,8 @@ import android.os.Message;
 import android.util.Log;
 
 import com.example.administrator.control.MyApp;
-import com.example.administrator.control.bean.SendCommand;
 import com.example.administrator.control.util.EncodingConversionTools;
 import com.example.administrator.control.util.MessageEvent;
-import com.example.administrator.control.util.TimeUtil;
-import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -18,7 +15,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.NoRouteToHostException;
@@ -35,9 +31,6 @@ public class ControlThread implements Runnable {
     private Socket socket;
     //接收UI线程的消息
     public Handler revHandler;
-
-    byte[] b = new byte[20];
-    private int tmp = 0;
 
     @Override
     public void run() {
@@ -110,6 +103,7 @@ public class ControlThread implements Runnable {
                 String content;
                 try {
                     while ((content = br.readLine()) != null) {
+//                        if (EncodingConversionTools.str2HexStr(content).equals("cc0c0101010102020202020202020202020226dd"))
 //                        System.out.println("返回数据：" + EncodingConversionTools.str2HexStr(content));
                     }
                 } catch (IOException e) {
