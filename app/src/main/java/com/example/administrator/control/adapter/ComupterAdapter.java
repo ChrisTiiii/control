@@ -16,7 +16,6 @@ import com.example.administrator.control.bean.EqupmentBean;
 
 import java.util.List;
 
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -26,6 +25,7 @@ import butterknife.ButterKnife;
  * Description:
  **/
 public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.ComputerViewHolder> {
+
     private Context context;
     private List<EqupmentBean> list;
     // 利用接口 -> 给RecyclerView设置点击事件
@@ -80,7 +80,8 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
         }
         //被选中
         if (position == getPosition()) {
-            computerViewHolder.tvComputerid.setTextColor(Color.parseColor("#f5df25"));
+            computerViewHolder.tvComputerid.setTextColor(Color.parseColor("#43fdff"));
+            computerViewHolder.normalId.setTextColor(Color.parseColor("#43fdff"));
             if (position != 0) {
                 if (list.get(position).getStatus() == 1) {
                     Glide.with(context).load(R.drawable.online_after).into(computerViewHolder.imgComputer);
@@ -92,6 +93,7 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
             }
         } else {//未被选中
             computerViewHolder.tvComputerid.setTextColor(Color.parseColor("#ffffff"));
+            computerViewHolder.normalId.setTextColor(Color.parseColor("#ffffff"));
             if (position != 0) {
                 if (list.get(position).getStatus() == 1) {
                     Glide.with(context).load(R.drawable.online_before).into(computerViewHolder.imgComputer);
@@ -115,6 +117,8 @@ public class ComupterAdapter extends RecyclerView.Adapter<ComupterAdapter.Comput
         TextView tvComputerid;
         @BindView(R.id.img_computer)
         ImageView imgComputer;
+        @BindView(R.id.normal_id)
+        TextView normalId;
 
         ComputerViewHolder(View view) {
             super(view);

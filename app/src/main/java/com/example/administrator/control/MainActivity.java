@@ -23,6 +23,7 @@ import com.example.administrator.control.bean.EqupmentBean;
 import com.example.administrator.control.bean.SendCommand;
 import com.example.administrator.control.fragment.ControlFragment;
 import com.example.administrator.control.tcp.ClientThread;
+import com.example.administrator.control.tcp.ControlThread;
 import com.example.administrator.control.util.MessageEvent;
 import com.example.administrator.control.util.NetWorkUtil;
 import com.example.administrator.control.util.SharedPreferencesUtils;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private ClientThread clientThread;
+    private ControlThread controlThread;
     private ComupterAdapter comupterAdapter;
     private List<EqupmentBean> list;
     private String account;
@@ -186,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         try {
                             Thread.sleep(100);
-                            getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(position), clientThread)).commit();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(position), clientThread, controlThread)).commit();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -205,6 +207,8 @@ public class MainActivity extends AppCompatActivity {
             initLeft();
             clientThread = new ClientThread(account);
             new Thread(clientThread).start();
+            controlThread = new ControlThread();
+            new Thread(controlThread).start();
         } else
             Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
     }
@@ -226,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
 //                    clientThread.sendData(new Gson().toJson(connect));
 //                }
 //            }).start();
-            getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(0), clientThread)).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(0), clientThread, controlThread)).commit();
         } else
             Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
     }

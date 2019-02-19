@@ -19,6 +19,7 @@ import com.example.administrator.control.R;
 import com.example.administrator.control.bean.EqupmentBean;
 import com.example.administrator.control.bean.SendCommand;
 import com.example.administrator.control.tcp.ClientThread;
+import com.example.administrator.control.tcp.ControlThread;
 import com.example.administrator.control.util.NetWorkUtil;
 import com.example.administrator.control.util.TimeUtil;
 import com.google.gson.Gson;
@@ -123,12 +124,14 @@ public class ControlFragment extends Fragment {
 
     private EqupmentBean equpBean;
     private ClientThread thread;
+    private ControlThread controlThread;
     private String account;
 
-    public ControlFragment(String account, EqupmentBean equpBean, ClientThread thread) {
+    public ControlFragment(String account, EqupmentBean equpBean, ClientThread thread, ControlThread controlThread) {
         this.account = account;
         this.equpBean = equpBean;
         this.thread = thread;
+        this.controlThread = controlThread;
     }
 
     public ControlFragment() {
@@ -152,13 +155,13 @@ public class ControlFragment extends Fragment {
             switch (equpBean.getStatus()) {
                 case 1:
                     computerId.setText(equpBean.getName());
-                    computerStatus.setTextColor(Color.parseColor("#f5df25"));
-                    computerStatus.setText("设备在线");
+                    computerStatus.setTextColor(Color.parseColor("#43fdff"));
+                    computerStatus.setText("• 设备在线");
                     break;
                 case -1:
-                    computerStatus.setTextColor(Color.parseColor("#FF0000"));
+                    computerStatus.setTextColor(Color.parseColor("#ff6e6e"));
                     computerId.setText(equpBean.getName());
-                    computerStatus.setText("设备不在线");
+                    computerStatus.setText("• 设备不在线");
                     break;
                 case 0:
                     computerId.setText(equpBean.getName());
@@ -210,6 +213,23 @@ public class ControlFragment extends Fragment {
             Toast.makeText(getContext(), "当前网络不可用", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 发送指令给继电器
+     * "aa0a0101010101010101010101010101010101bb"
+     */
+    public void sendOrder(final String order) {
+        if (NetWorkUtil.isNetworkAvailable(getContext())) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    controlThread.sendData(order);
+                }
+            }).start();
+        } else
+            Toast.makeText(getContext(), "当前网络不可用", Toast.LENGTH_SHORT).show();
+
+    }
+
     @OnClick({R.id.btn_close_wel, R.id.btn_wel_clear, R.id.btn_create_wel, R.id.btn_show_wel, R.id.btn_video_normal, R.id.btn_computer_open, R.id.fullscreen, R.id.btn_computer_close, R.id.btn_light_open, R.id.btn_light_close, R.id.btn_img_last, R.id.btn_img_next, R.id.btn_video_open, R.id.btn_video_close, R.id.btn_video_start, R.id.btn_video_stop, R.id.btn_video_up, R.id.btn_video_down, R.id.btn_video_speed, R.id.btn_video_backup, R.id.btn_video_voiceup, R.id.btn_video_voicelow, R.id.btn_video_mute, R.id.btn_img_start, R.id.btn_img_bigger, R.id.btn_img_smaller, R.id.btn_img_full, R.id.btn_img_exit, R.id.ppt_start, R.id.ppt_last, R.id.ppt_next, R.id.ppt_first, R.id.ppt_lastest, R.id.ppt_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -241,10 +261,10 @@ public class ControlFragment extends Fragment {
                 sendMsg(5, 2, "All", "Command", "close welcome");
                 break;
             case R.id.btn_computer_open:
-                sendMsg(4, 1, "open computer");
+                sendOrder("aa0a0101010101010101010101010101010101bb");
                 break;
             case R.id.btn_computer_close:
-                sendMsg(4, 1, "close computer");
+                sendOrder("aa0b0202020202020202020202020202020201bb");
                 break;
             case R.id.btn_light_open:
                 sendMsg(4, 1, "open light");

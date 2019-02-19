@@ -1,12 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bk">
+    android:background="@drawable/back_main">
 
     <LinearLayout
         android:id="@+id/menu"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="11dp"
@@ -17,6 +17,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:background="@drawable/menu" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -25,11 +26,11 @@
         android:orientation="horizontal">
 
         <android.support.v7.widget.RecyclerView
-            android:paddingLeft="20dp"
             android:id="@+id/computer_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.2"
+            android:layout_weight="1"
+            android:paddingLeft="20dp"
             android:paddingTop="50dp" />
 
         <!--<View-->
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:paddingLeft="50dp"
-            android:paddingTop="50dp">
+            android:paddingTop="80dp">
 
         </RelativeLayout>
 
