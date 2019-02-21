@@ -223,13 +223,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private void initRight() {
         if (NetWorkUtil.isNetworkAvailable(this)) {
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    SendCommand connect = new SendCommand(account, list.get(0).getName(), TimeUtil.nowTime(), "Connect", "client", null, "client");
-//                    clientThread.sendData(new Gson().toJson(connect));
-//                }
-//            }).start();
             getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment(account, list.get(0), clientThread, controlThread)).commit();
         } else
             Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
@@ -290,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
                 //创建一个ContentVa对象（自定义的）
                 helper.putValues(new SharedPreferencesUtils.ContentValue("name", ""));
                 clientThread.destorySocket();
+                controlThread.destorySocket();
                 finish();
                 break;
             case R.id.option_date:
@@ -335,6 +329,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
                             getSupportFragmentManager().beginTransaction().replace(R.id.right_fragment, new ControlFragment()).commit();
                             clientThread.destorySocket();
+                            controlThread.destorySocket();
                             list.clear();
                             comupterAdapter.update(list);
                             initSocket();
@@ -360,6 +355,7 @@ public class MainActivity extends AppCompatActivity {
         if (EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().unregister(this);
         clientThread.destorySocket();
+        controlThread.destorySocket();
     }
 
 
@@ -415,6 +411,7 @@ public class MainActivity extends AppCompatActivity {
                                 //创建一个ContentVa对象（自定义的）
                                 helper.putValues(new SharedPreferencesUtils.ContentValue("name", ""));
                                 clientThread.destorySocket();
+                                controlThread.destorySocket();
                                 finish();
                                 break;
                         }

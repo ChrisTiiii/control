@@ -118,4 +118,12 @@ public class ControlThread implements Runnable {
 
     }
 
+    public void destorySocket() {
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
